@@ -32,7 +32,7 @@ public class RecipeController {
 	public List<Recipe> getAllRecipes(HttpServletRequest req,
 			HttpServletResponse res,
 			Principal principal){
-		List<Recipe> recipes = new ArrayList<>();
+		List<Recipe> recipes = recipeSvc.getAllRecipes();
 		
 		
 		return recipes;
@@ -43,7 +43,7 @@ public class RecipeController {
 			HttpServletResponse res,
 			Principal principal,
 			@PathVariable("id") Integer id) {
-		Recipe recipe = new Recipe();
+		Recipe recipe = recipeSvc.getOneRecipe(id);
 		
 		return recipe;
 	}
@@ -53,6 +53,7 @@ public class RecipeController {
 			HttpServletResponse res,
 			Principal principal,
 			@RequestBody Recipe recipe) {
+		recipe = recipeSvc.createRecipe(recipe);
 		
 		return recipe;
 	}
@@ -63,6 +64,7 @@ public class RecipeController {
 			Principal principal,
 			@PathVariable("id") Integer id,
 			@RequestBody Recipe recipe) {
+		recipe = recipeSvc.updateRecipe(id, recipe);
 		
 		return recipe;
 	}

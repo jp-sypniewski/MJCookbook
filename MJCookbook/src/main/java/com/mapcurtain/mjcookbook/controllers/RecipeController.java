@@ -32,10 +32,16 @@ public class RecipeController {
 	public List<Recipe> getAllRecipes(HttpServletRequest req,
 			HttpServletResponse res,
 			Principal principal){
-		List<Recipe> recipes = recipeSvc.getAllRecipes();
+		try {
+			List<Recipe> recipes = recipeSvc.getAllRecipes();
+			res.setStatus(200);
 		
-		
-		return recipes;
+			return recipes;
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(404);
+			return null;
+		}
 	}
 	
 	@GetMapping(value="recipes/{id}")
@@ -43,9 +49,20 @@ public class RecipeController {
 			HttpServletResponse res,
 			Principal principal,
 			@PathVariable("id") Integer id) {
-		Recipe recipe = recipeSvc.getOneRecipe(id);
-		
-		return recipe;
+		try {
+			Recipe recipe = recipeSvc.getOneRecipe(id);
+			if (recipe != null) {
+				res.setStatus(200);
+				return recipe;
+			} else {
+				res.setStatus(404);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 	}
 	
 	@PostMapping(value="recipes")
@@ -53,9 +70,15 @@ public class RecipeController {
 			HttpServletResponse res,
 			Principal principal,
 			@RequestBody Recipe recipe) {
-		recipe = recipeSvc.createRecipe(recipe);
-		
-		return recipe;
+		try {
+			recipe = recipeSvc.createRecipe(recipe);
+			res.setStatus(201);
+			return recipe;
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 	}
 	
 	@PutMapping(value="recipes/{id}")
@@ -64,9 +87,20 @@ public class RecipeController {
 			Principal principal,
 			@PathVariable("id") Integer id,
 			@RequestBody Recipe recipe) {
-		recipe = recipeSvc.updateRecipe(id, recipe);
-		
-		return recipe;
+		try {
+			recipe = recipeSvc.updateRecipe(id, recipe);
+			if (recipe != null) {
+				res.setStatus(200);
+				return recipe;
+			} else {
+				res.setStatus(304);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Profile {
@@ -19,5 +20,8 @@ public class Profile {
 	private String lastName;
 	
 	private String description;
+	
+	@OneToOne(mappedBy="profile")
+	private User user;
 
 }

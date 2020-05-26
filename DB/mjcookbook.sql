@@ -5,15 +5,15 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema mjcookbook
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `mjcookbook` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema mjcookbook
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `mjcookbook` DEFAULT CHARACTER SET utf8 ;
+USE `mjcookbook` ;
 
 -- -----------------------------------------------------
 -- Table `profile`
@@ -94,6 +94,12 @@ CREATE TABLE IF NOT EXISTS `recipe_has_user` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+SET SQL_MODE = '';
+DROP USER IF EXISTS jpauser;
+SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+CREATE USER 'jpauser' IDENTIFIED BY 'whatsaneal';
+
+GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'jpauser';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -103,7 +109,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Data for table `profile`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
+USE `mjcookbook`;
 INSERT INTO `profile` (`id`, `first_name`, `last_name`, `description`) VALUES (1, 'jp', 'sypniewski', 'a developer');
 INSERT INTO `profile` (`id`, `first_name`, `last_name`, `description`) VALUES (2, 'mj', 'cs', 'a cat');
 
@@ -114,7 +120,7 @@ COMMIT;
 -- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
+USE `mjcookbook`;
 INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('orangeisntblue', 'password', '2020-01-01', 1);
 INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('mj', 'password', '2020-01-01', 2);
 
@@ -125,7 +131,7 @@ COMMIT;
 -- Data for table `recipe`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
+USE `mjcookbook`;
 INSERT INTO `recipe` (`id`, `title`, `recipe_text`, `created_at`, `updated_at`, `user_username`) VALUES (1, 'pizza', 'make dough make sauce assemble bake', '2020-01-01', '2020-01-01', 'orangeisntblue');
 INSERT INTO `recipe` (`id`, `title`, `recipe_text`, `created_at`, `updated_at`, `user_username`) VALUES (2, 'turkey', 'slice up put in bowl', '2020-01-01', '2020-01-01', 'mj');
 
@@ -136,7 +142,7 @@ COMMIT;
 -- Data for table `recipe_has_user`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `mydb`;
+USE `mjcookbook`;
 INSERT INTO `recipe_has_user` (`recipe_id`, `user_username`) VALUES (1, 'orangeisntblue');
 INSERT INTO `recipe_has_user` (`recipe_id`, `user_username`) VALUES (1, 'mj');
 INSERT INTO `recipe_has_user` (`recipe_id`, `user_username`) VALUES (2, 'mj');

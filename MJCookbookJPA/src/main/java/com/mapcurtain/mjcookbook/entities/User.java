@@ -30,6 +30,10 @@ public class User {
 	@JoinColumn(name="profile_id", unique=true)
 	private Profile profile;
 	
+	private Boolean enabled;
+	
+	private String role;
+	
 	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinTable(name="recipe_has_user",
 		joinColumns=@JoinColumn(name="user_username"),
@@ -40,13 +44,16 @@ public class User {
 		super();
 	}
 
-	public User(String username, String password, LocalDateTime createdAt, Profile profile,
+	public User(String username, String password, LocalDateTime createdAt,
+			Profile profile, Boolean enabled, String role,
 			List<Recipe> favoriteRecipes) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.createdAt = createdAt;
 		this.profile = profile;
+		this.enabled = enabled;
+		this.role = role;
 		this.favoriteRecipes = favoriteRecipes;
 	}
 
@@ -80,6 +87,22 @@ public class User {
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public List<Recipe> getFavoriteRecipes() {

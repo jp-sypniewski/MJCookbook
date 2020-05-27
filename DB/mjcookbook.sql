@@ -121,8 +121,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mjcookbook`;
-INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('orangeisntblue', 'password', '2020-01-01', 1);
-INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('mj', 'password', '2020-01-01', 2);
+INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('orangeisntblue', '$2a$10$wlIKuK1G4JDAplCXtg2EVuEuuXOZaq1Tq801yhumTAVfT4Oks4w/G\"', '2020-01-01', 1);
+INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('mj', '$2a$10$wlIKuK1G4JDAplCXtg2EVuEuuXOZaq1Tq801yhumTAVfT4Oks4w/G\"', '2020-01-01', 2);
 
 COMMIT;
 

@@ -40,6 +40,13 @@ export class RecipeService {
         'Authorization': `Basic ${credentials}`
       })
     };
+    return this.http.post<Recipe>(this.baseUrl + 'api/recipes', recipe, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('RecipeService.createRecipe(): error creating recipe.');
+      })
+    );
   }
 
   updateRecipe(recipe: Recipe){
@@ -50,6 +57,13 @@ export class RecipeService {
         'Authorization': `Basic ${credentials}`
       })
     };
+    return this.http.post<Recipe>(this.baseUrl + 'api/recipes/' + recipe.id, recipe, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('RecipeService.updateRecipe(): error updating recipe.');
+      })
+    );
   }
 
 

@@ -20,8 +20,7 @@ export class AuthService {
          'X-Requested-With': 'XMLHttpRequest'
        })
     };
-   return this.http
-   .get(this.baseUrl + 'authenticate', httpOptions)
+   return this.http.get(this.baseUrl + 'authenticate', httpOptions)
    .pipe(
      tap((res) => {
        localStorage.setItem('credentials' , credentials);

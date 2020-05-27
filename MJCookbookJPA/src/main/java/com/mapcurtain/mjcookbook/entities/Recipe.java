@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Recipe {
 	
@@ -39,6 +41,7 @@ public class Recipe {
 	@JoinColumn(name="user_username")
 	private User user;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="favoriteRecipes")
 	private List<User> favoritedBy;
 

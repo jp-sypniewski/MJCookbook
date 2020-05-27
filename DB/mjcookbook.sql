@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(64) NOT NULL,
   `created_at` DATETIME NOT NULL DEFAULT NOW(),
   `profile_id` INT NOT NULL,
+  `enabled` TINYINT NULL,
+  `role` VARCHAR(8) NULL,
   PRIMARY KEY (`username`),
   INDEX `fk_user_profile_idx` (`profile_id` ASC),
   CONSTRAINT `fk_user_profile`
@@ -121,8 +123,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mjcookbook`;
-INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('orangeisntblue', 'password', '2020-01-01', 1);
-INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`) VALUES ('mj', 'password', '2020-01-01', 2);
+INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`, `enabled`, `role`) VALUES ('orangeisntblue', '$2a$10$6Xfo2Hdk.PseVvxYah70Y.NN087XAh2Wr8rd8wMxs4b7Gigj9Pr7K', '2020-01-01', 1, 1, 'admin');
+INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`, `enabled`, `role`) VALUES ('mj', '$2a$10$6Xfo2Hdk.PseVvxYah70Y.NN087XAh2Wr8rd8wMxs4b7Gigj9Pr7K', '2020-01-01', 2, 1, 'user');
 
 COMMIT;
 

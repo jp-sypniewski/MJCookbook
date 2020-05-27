@@ -8,6 +8,10 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
     
+    <class>com.mapcurtain.mjcookbook.entities.Profile</class>
+    <class>com.mapcurtain.mjcookbook.entities.Recipe</class>
+    <class>com.mapcurtain.mjcookbook.entities.User</class>
+    
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mjcookbook?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />

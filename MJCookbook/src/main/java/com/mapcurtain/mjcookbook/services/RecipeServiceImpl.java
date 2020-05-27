@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mapcurtain.mjcookbook.entities.Recipe;
 import com.mapcurtain.mjcookbook.repositories.RecipeRepository;
 
+@Service
 public class RecipeServiceImpl implements RecipeService {
 	
 	@Autowired

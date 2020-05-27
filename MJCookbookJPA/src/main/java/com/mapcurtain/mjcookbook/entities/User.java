@@ -14,12 +14,15 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
 	@Id
 	private String username;
 	
+	@JsonIgnore
 	private String password;
 	
 	@Column(name="created_at")
@@ -34,6 +37,7 @@ public class User {
 	
 	private String role;
 	
+	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinTable(name="recipe_has_user",
 		joinColumns=@JoinColumn(name="user_username"),

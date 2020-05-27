@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Profile {
 	
@@ -22,6 +24,7 @@ public class Profile {
 	
 	private String description;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="profile")
 	private User user;
 

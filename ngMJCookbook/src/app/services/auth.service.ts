@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+
+  // log user in, creates btoa creds and checks against authenticate path
   login(username, password) {
     const credentials = this.generateBasicAuthCredentials(username, password);
     const httpOptions = {
@@ -31,6 +34,35 @@ export class AuthService {
        return throwError('UserService.login(): Error logging in.');
      })
    );
+  }
+
+  // creates user, references register path
+  createUser(user){
+    return this.http.post<User>(this.baseUrl+'register', user)
+   .pipe(
+     catchError((err: any) => {
+       console.log(err);
+       return throwError('AuthService.createUser(): error registering user.');
+     })
+   );
+  }
+
+  updateUser(user){
+    const credentials = this.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.put<User>(this.baseUrl+'update', user, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('AuthService.updateUser(): error updating user.');
+      })
+    );
   }
 
   // removes local creds

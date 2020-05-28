@@ -41,9 +41,9 @@
   <h3>Login Form</h3>
   <form #login="ngForm">
     <label for="username">Username:</label><br>
-    <input type="text" name="username"><br><br>
+    <input type="text" name="username" ngModel><br><br>
     <label for="password">Password:</label><br>
-    <input type="password" name="password"><br><br>
+    <input type="password" name="password" ngModel><br><br>
     <button type="submit" (click)="logIn(login)">Login</button>
   </form>
   <br><hr><br>

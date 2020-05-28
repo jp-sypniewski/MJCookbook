@@ -1,1 +1,34 @@
-<p>account works!</p>
+<div *ngIf="loggedIn">
+  <h3>{{user.username}}</h3>
+  <table>
+    <tr>
+      <th>First Name</th>
+      <td>{{user.profile.firstName}}</td>
+    </tr>
+    <tr>
+      <th>Last Name</th>
+      <td>{{user.profile.lastName}}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{user.profile.description}}</td>
+    </tr>
+  </table>
+
+</div>
+<div *ngIf="!loggedIn">
+  <h3>New User Form</h3>
+  <form>
+    <label for="title">Username:</label><br>
+    <input type="text" id="title" name="title" [(ngModel)]="user.username"><br><br>
+    <label for="password"> Password:</label><br>
+    <input type="password" id="password" name="password" [(ngModel)]="user.password"><br><br>
+    <label for="firstName"> First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" [(ngModel)]="user.profile.firstName"><br><br>
+    <label for="lastName"> Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
+    <label for="description"> Description:</label><br>
+    <input type="text" id="description" name="description" [(ngModel)]="user.profile.description"><br><br>
+    <button (click)="submit()">Submit</button>
+  </form>
+</div>

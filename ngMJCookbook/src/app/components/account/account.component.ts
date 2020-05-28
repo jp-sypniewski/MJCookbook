@@ -21,7 +21,7 @@ export class AccountComponent implements OnInit {
   }
 
   reload(){
-    if (this.authSvc.checkLogin){
+    if (this.authSvc.checkLogin()){
       this.loggedIn = true;
     }
     this.authSvc.getUserInfo().subscribe(

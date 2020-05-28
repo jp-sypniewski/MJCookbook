@@ -20,15 +20,15 @@
   <div *ngIf="showEdit">
     <form>
       <label for="title">Username:</label><br>
-      <input type="text" id="title" name="title" [(ngModel)]="user.username"><br><br>
+      <input type="text" name="title" [(ngModel)]="user.username"><br><br>
       <label for="password"> Password:</label><br>
-      <input type="password" id="password" name="password" [(ngModel)]="user.password"><br><br>
+      <input type="password" name="password" [(ngModel)]="user.password"><br><br>
       <label for="firstName"> First Name:</label><br>
-      <input type="text" id="firstName" name="firstName" [(ngModel)]="user.profile.firstName"><br><br>
+      <input type="text" name="firstName" [(ngModel)]="user.profile.firstName"><br><br>
       <label for="lastName"> Last Name:</label><br>
-      <input type="text" id="lastName" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
+      <input type="text" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
       <label for="description"> Description:</label><br>
-      <input type="text" id="description" name="description" [(ngModel)]="user.profile.description"><br><br>
+      <input type="text" name="description" [(ngModel)]="user.profile.description"><br><br>
       <button (click)="update()">Submit</button>
     </form>
   </div>
@@ -41,9 +41,9 @@
   <h3>Login Form</h3>
   <form #login="ngForm">
     <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username"><br><br>
+    <input type="text" name="username"><br><br>
     <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
+    <input type="password" name="password"><br><br>
     <button type="submit" (click)="logIn(login)">Login</button>
   </form>
   <br><hr><br>
@@ -51,15 +51,15 @@
   <h3>New User Form</h3>
   <form>
     <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" [(ngModel)]="user.username"><br><br>
+    <input type="text" name="username" [(ngModel)]="user.username"><br><br>
     <label for="password"> Password:</label><br>
-    <input type="password" id="password" name="password" [(ngModel)]="user.password"><br><br>
+    <input type="password" name="password" [(ngModel)]="user.password"><br><br>
     <label for="firstName"> First Name:</label><br>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="user.profile.firstName"><br><br>
+    <input type="text" name="firstName" [(ngModel)]="user.profile.firstName"><br><br>
     <label for="lastName"> Last Name:</label><br>
-    <input type="text" id="lastName" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
+    <input type="text" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
     <label for="description"> Description:</label><br>
-    <input type="text" id="description" name="description" [(ngModel)]="user.profile.description"><br><br>
+    <input type="text" name="description" [(ngModel)]="user.profile.description"><br><br>
     <button type="submit" (click)="submit()">Submit</button>
   </form>
 </div>

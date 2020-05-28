@@ -1,6 +1,8 @@
+import { RecipeService } from './../../services/recipe.service';
 import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,9 +21,23 @@ export class RecipeListComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private authSvc: AuthService,
+    private recipeSvc: RecipeService) { }
 
   ngOnInit(): void {
+  }
+
+  reload(){
+    if (this.authSvc.checkLogin()){
+      this.recipeSvc.getAllRecipes().subscribe(
+        data => {
+          this.recipes = data;
+        },
+        err => {
+          console.error('RecipeListComponent.reload(): issue collecting recipes list')
+        }
+      );
+    }
   }
 
   selectARecipe(recipe: Recipe){

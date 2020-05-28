@@ -1,1 +1,18 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-dark bg-dark navbar-expand-md sticky-top">
+  <a class="navbar-brand" [routerLink] = "'home'" routerLinkActive="active">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="nav navbar-nav navbar-left mr-auto">
+      <a class="nav-item nav-link" [routerLink] = "'learn'" routerLinkActive="active">About</a>
+      <a class="nav-item nav-link" [routerLink] = "'currentcustomer'" routerLinkActive="active">Expo</a>
+    </div>
+    <div class="nav navbar-nav">
+      <a *ngIf="!checkForUser()" class="nav-item nav-link" [routerLink] = "'login'" routerLinkActive="active">Login</a>
+      <a *ngIf="!checkForUser()" class="nav-item nav-link" [routerLink] = "'account'" routerLinkActive="active">Sign Up</a>
+      <a *ngIf="checkForUser()" class="nav-item nav-link" [routerLink] = "'account'" routerLinkActive="active">Account</a>
+      <a *ngIf="checkForUser()" class="nav-item nav-link" (click)="logout()" [routerLink] = "'login'" routerLinkActive="active">Sign Out</a>
+    </div>
+  </div>
+</nav>

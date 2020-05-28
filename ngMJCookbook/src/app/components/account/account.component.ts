@@ -3,6 +3,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Profile } from 'src/app/models/profile';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -15,7 +16,8 @@ export class AccountComponent implements OnInit {
   loggedIn: boolean = false;
   showEdit: boolean = false;
 
-  constructor(private authSvc: AuthService) { }
+  constructor(private router: Router,
+    private authSvc: AuthService) { }
 
   ngOnInit(): void {
     this.reload();

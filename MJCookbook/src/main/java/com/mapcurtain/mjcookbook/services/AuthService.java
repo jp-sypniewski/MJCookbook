@@ -10,4 +10,6 @@ public interface AuthService {
 
 	User update(User user, String username);
 
+	User getUserByUsername(String username);
+
 }

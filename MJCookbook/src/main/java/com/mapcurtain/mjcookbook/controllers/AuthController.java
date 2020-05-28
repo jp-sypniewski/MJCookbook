@@ -27,6 +27,20 @@ public class AuthController {
 		return principal;
 	}
 	
+	@GetMapping(path="/user")
+	public User getUser(HttpServletResponse res,
+			Principal principal) {
+		
+		User user = authSvc.getUserByUsername(principal.getName());
+		if (user != null) {
+			res.setStatus(200);
+			return user;
+		} else {
+			res.setStatus(400);
+			return null;
+		}
+	}
+	
 	@PostMapping(path="/register")
 	public User register(HttpServletResponse res,
 			@RequestBody User user) {

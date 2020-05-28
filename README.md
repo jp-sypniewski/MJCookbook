@@ -10,7 +10,7 @@ v0.0 Literally just recipes as written text.
 
 * Spring RESTful API, Spring Data JPA, MySQL
 
-| Endpoints |
+#### Endpoints
 | Path | Object | Details |
 |--|--|--|
 | `/authenticate` | Principal | Logs (pre-existing) user in |

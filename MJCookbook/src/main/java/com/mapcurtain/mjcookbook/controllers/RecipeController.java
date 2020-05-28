@@ -1,7 +1,6 @@
 package com.mapcurtain.mjcookbook.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mapcurtain.mjcookbook.entities.Recipe;
+import com.mapcurtain.mjcookbook.entities.User;
 import com.mapcurtain.mjcookbook.services.RecipeService;
 
 @RestController
@@ -71,6 +71,9 @@ public class RecipeController {
 			Principal principal,
 			@RequestBody Recipe recipe) {
 		try {
+			User userObjectForUsername = new User();
+			userObjectForUsername.setUsername(principal.getName());
+			recipe.setUser(userObjectForUsername);
 			recipe = recipeSvc.createRecipe(recipe);
 			res.setStatus(201);
 			return recipe;

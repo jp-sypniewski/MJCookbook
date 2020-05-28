@@ -62,6 +62,7 @@ export class RecipeListComponent implements OnInit {
       // if it has an id, then submit the put
       this.recipeSvc.updateRecipe(this.selectedRecipe).subscribe(
         data => {
+          this.reload();
           this.selectedRecipe = data;
         },
         err => {
@@ -72,6 +73,7 @@ export class RecipeListComponent implements OnInit {
       // otherwise submit the post
       this.recipeSvc.createRecipe(this.selectedRecipe).subscribe(
         data => {
+          this.reload();
           this.selectedRecipe = data;
         },
         err => {

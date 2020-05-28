@@ -77,6 +77,7 @@ export class AccountComponent implements OnInit {
   }
 
   update(){
+    console.log(this.user);
     this.authSvc.updateUser(this.user).subscribe(
       data => {
         this.user = data;

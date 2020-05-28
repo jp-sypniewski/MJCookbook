@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class User {
@@ -22,7 +23,6 @@ public class User {
 	@Id
 	private String username;
 	
-	@JsonIgnore
 	private String password;
 	
 	@Column(name="created_at")
@@ -69,10 +69,12 @@ public class User {
 		this.username = username;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

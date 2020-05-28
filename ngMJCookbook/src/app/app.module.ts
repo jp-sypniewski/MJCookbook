@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from './services/recipe.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -25,7 +26,8 @@ import { AccountComponent } from './components/account/account.component';
     HttpClientModule
   ],
   providers: [
-    RecipeService
+    RecipeService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

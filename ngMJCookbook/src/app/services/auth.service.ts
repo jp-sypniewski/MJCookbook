@@ -8,6 +8,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class AuthService {
+  [x: string]: any;
 
   private baseUrl = 'http://localhost:8085/';
 

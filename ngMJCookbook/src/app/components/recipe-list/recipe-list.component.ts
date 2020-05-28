@@ -3,6 +3,7 @@ import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -21,10 +22,12 @@ export class RecipeListComponent implements OnInit {
 
 
 
-  constructor(private authSvc: AuthService,
+  constructor(private router: Router,
+    private authSvc: AuthService,
     private recipeSvc: RecipeService) { }
 
   ngOnInit(): void {
+    this.reload();
   }
 
   reload(){
@@ -57,8 +60,26 @@ export class RecipeListComponent implements OnInit {
   submit(){
     if (this.selectedRecipe.id != null){
       // if it has an id, then submit the put
+      this.recipeSvc.updateRecipe(this.selectedRecipe).subscribe(
+        data => {
+          this.reload();
+          this.selectedRecipe = data;
+        },
+        err => {
+          console.error('RecipeListComponent.submit(): issue updating recipe')
+        }
+      );
     } else {
       // otherwise submit the post
+      this.recipeSvc.createRecipe(this.selectedRecipe).subscribe(
+        data => {
+          this.reload();
+          this.selectedRecipe = data;
+        },
+        err => {
+          console.error('RecipeListComponent.submit(): issue creating new recipe')
+        }
+      );
     }
     // reassign it to the selected one to show the new one
     this.showForm = false;

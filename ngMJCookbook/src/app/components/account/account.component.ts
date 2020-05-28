@@ -1,6 +1,7 @@
 import { User } from './../../models/user';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-account',
@@ -11,6 +12,7 @@ export class AccountComponent implements OnInit {
 
   user: User;
   loggedIn: boolean = false;
+  showEdit: boolean = false;
 
   constructor(private authSvc: AuthService) { }
 
@@ -33,6 +35,18 @@ export class AccountComponent implements OnInit {
     );
   }
 
+  logIn(form: NgForm){
+    this.authSvc.login(form.value.username, form.value.password).subscribe(
+      next => {
+        console.log('AccountComponent.logIn(): user logged in');
+        this.reload();
+      },
+      error => {
+        console.error('AccountComponent.logIn(): error logging in.');
+      }
+    );
+  }
+
   submit(){
     this.authSvc.createUser(this.user).subscribe(
       data => {
@@ -43,11 +57,23 @@ export class AccountComponent implements OnInit {
             console.error('AccountComponent.submit(): error logging new user in')
           }
         )
-        this.user = data;
+        this.reload();
       },
       err => {
         this.user = new User();
         console.error('AccountComponent.submit(): error creating new user');
+      }
+    );
+  }
+
+  update(){
+    this.authSvc.updateUser(this.user).subscribe(
+      data => {
+        this.user = data;
+        this.showEdit = false;
+      },
+      err => {
+        console.error('AccountComponent.update(): error updating user')
       }
     );
   }

@@ -5,11 +5,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <div class="nav navbar-nav navbar-left mr-auto">
-      <a class="nav-item nav-link" [routerLink] = "'learn'" routerLinkActive="active">About</a>
-      <a class="nav-item nav-link" [routerLink] = "'currentcustomer'" routerLinkActive="active">Expo</a>
+      <a class="nav-item nav-link" [routerLink] = "'recipeList'" routerLinkActive="active">Recipe List</a>
+      <a class="nav-item nav-link" [routerLink] = "'account'" routerLinkActive="active">Account</a>
     </div>
     <div class="nav navbar-nav">
-      <a *ngIf="!checkForUser()" class="nav-item nav-link" [routerLink] = "'login'" routerLinkActive="active">Login</a>
+      <a *ngIf="!checkForUser()" class="nav-item nav-link" [routerLink] = "'account'" routerLinkActive="active">Login</a>
       <a *ngIf="!checkForUser()" class="nav-item nav-link" [routerLink] = "'account'" routerLinkActive="active">Sign Up</a>
       <a *ngIf="checkForUser()" class="nav-item nav-link" [routerLink] = "'account'" routerLinkActive="active">Account</a>
       <a *ngIf="checkForUser()" class="nav-item nav-link" (click)="logout()" [routerLink] = "'login'" routerLinkActive="active">Sign Out</a>

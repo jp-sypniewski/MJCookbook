@@ -36,6 +36,25 @@ export class AuthService {
    );
   }
 
+  // gets user info from principal
+  getUserInfo(){
+    const credentials = this.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.get<User>(this.baseUrl + 'user', httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('AuthService.getUserInfo(): error getting user info.');
+      })
+    );
+  }
+
   // creates user, references register path
   createUser(user){
     return this.http.post<User>(this.baseUrl+'register', user)

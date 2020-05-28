@@ -20,16 +20,17 @@ export class AccountComponent implements OnInit {
     private authSvc: AuthService) { }
 
   ngOnInit(): void {
+    this.user = new User();
+    this.user.profile = new Profile();
     this.reload();
   }
 
   reload(){
-
     if (this.authSvc.checkLogin()){
-      this.loggedIn = true;
       this.authSvc.getUserInfo().subscribe(
         data => {
           this.user = data;
+          this.loggedIn = true;
         },
         err => {
           this.user = new User();

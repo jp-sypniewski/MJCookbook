@@ -1,5 +1,6 @@
 package com.mapcurtain.mjcookbook;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import javax.persistence.EntityManager;
@@ -44,7 +45,8 @@ class MealTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		assertEquals(meal.getRating(), 5);
+		assertEquals(meal.getUser().getUsername(), "mj");
 	}
 
 }

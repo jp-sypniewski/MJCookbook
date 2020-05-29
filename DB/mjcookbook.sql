@@ -96,6 +96,37 @@ CREATE TABLE IF NOT EXISTS `recipe_has_user` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `meal`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `meal` ;
+
+CREATE TABLE IF NOT EXISTS `meal` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `rating` INT NULL,
+  `completed` TINYINT NOT NULL,
+  `enabled` TINYINT NOT NULL,
+  `planned_for` DATETIME NULL,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME NOT NULL,
+  `recipe_id` INT NOT NULL,
+  `user_username` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_meal_recipe1_idx` (`recipe_id` ASC),
+  INDEX `fk_meal_user1_idx` (`user_username` ASC),
+  CONSTRAINT `fk_meal_recipe1`
+    FOREIGN KEY (`recipe_id`)
+    REFERENCES `recipe` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_meal_user1`
+    FOREIGN KEY (`user_username`)
+    REFERENCES `user` (`username`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS jpauser;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -148,6 +179,16 @@ USE `mjcookbook`;
 INSERT INTO `recipe_has_user` (`recipe_id`, `user_username`) VALUES (1, 'orangeisntblue');
 INSERT INTO `recipe_has_user` (`recipe_id`, `user_username`) VALUES (1, 'mj');
 INSERT INTO `recipe_has_user` (`recipe_id`, `user_username`) VALUES (2, 'mj');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `meal`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mjcookbook`;
+INSERT INTO `meal` (`id`, `rating`, `completed`, `enabled`, `planned_for`, `created_at`, `updated_at`, `recipe_id`, `user_username`) VALUES (1, 5, 1, 1, '2020-05-28', '2020-05-01', '2020-05-28', 2, 'mj');
 
 COMMIT;
 

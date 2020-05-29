@@ -17,7 +17,8 @@ public class MealServiceImpl implements MealService {
 	
 	@Override
 	public List<Meal> getMealsForUser(String username){
-		return null;
+		List<Meal> userMeals = mealRepo.findByUserUsername(username);
+		return userMeals;
 	}
 	
 	@Override

@@ -31,10 +31,16 @@ public class MealController {
 	@GetMapping(value="meals")
 	public List<Meal> getMealsByUser(HttpServletRequest req,
 			HttpServletResponse res,
-			Principal principal){
-		List<Meal> meals = new ArrayList<>();
-		
-		return meals;
+			Principal principal){	
+		try {
+			List<Meal> meals = mealSvc.getMealsForUser(principal.getName());
+			res.setStatus(200);
+			return meals;
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(404);
+			return null;
+		}
 	}
 	
 	@GetMapping(value="meals/{id}")

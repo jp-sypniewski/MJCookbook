@@ -69,6 +69,8 @@ public class MealController {
 			HttpServletResponse res,
 			Principal principal,
 			@RequestBody Meal meal) {
+		// the request will attach the user from the principal, and 
+		// must already include at least the id for the recipe
 		try {
 			meal = mealSvc.postMeal(principal.getName(), meal);
 			if (meal != null) {

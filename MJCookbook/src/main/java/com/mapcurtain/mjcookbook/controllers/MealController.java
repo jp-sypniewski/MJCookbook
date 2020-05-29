@@ -69,7 +69,20 @@ public class MealController {
 			HttpServletResponse res,
 			Principal principal,
 			@RequestBody Meal meal) {
-		return null;
+		try {
+			meal = mealSvc.postMeal(principal.getName(), meal);
+			if (meal != null) {
+				res.setStatus(200);
+				return meal;
+			} else {
+				res.setStatus(404);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 	}
 	
 	@PutMapping(value="meals/{id}")
@@ -78,7 +91,20 @@ public class MealController {
 			Principal principal,
 			@PathVariable("id") Integer id,
 			@RequestBody Meal meal) {
-		return null;
+		try {
+			meal = mealSvc.putMeal(id, meal);
+			if (meal != null) {
+				res.setStatus(200);
+				return meal;
+			} else {
+				res.setStatus(404);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 	}
 
 }

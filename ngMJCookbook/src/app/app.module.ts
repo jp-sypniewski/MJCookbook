@@ -11,13 +11,17 @@ import { AppComponent } from './app.component';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AccountComponent } from './components/account/account.component';
+import { HomeComponent } from './components/home/home.component';
+import { MealComponent } from './components/meal/meal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
     NavbarComponent,
-    AccountComponent
+    AccountComponent,
+    HomeComponent,
+    MealComponent
   ],
   imports: [
     BrowserModule,

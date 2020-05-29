@@ -14,6 +14,11 @@ v0.0 Literally just recipes as written text.  The user logs in, can view the lis
 * Angular9
 * Languages: Java, Typescript, Javascript, HTML, CSS, SQL
 
+### Sprints
+
+* Create project with recipes and users
+* Create meal (user cooks recipe)
+
 ### Endpoints
 | Path | Object | Details |
 |--|--|--|
@@ -21,5 +26,9 @@ v0.0 Literally just recipes as written text.  The user logs in, can view the lis
 | POST `/register` | User | Creates new user |
 | PUT `/update` | User | Updates existing user|
 | GET `api/recipes` | List<Recipe> | Gets list of all recipes |
-| PUT `api/recipes/{id}` | Recipe | Updates recipe record |
 | POST `api/recipes` | Recipe | Creates recipe record |
+| PUT `api/recipes/{id}` | Recipe | Updates recipe record |
+| GET `api/meals` | List<Meal> | Gets list of meals for current user |
+| GET `api/meals/{id}` | Meal | Get meal by id |
+| POST `api/meals` | Meal | Create meal record for current user |
+| PUT `api/meals/{id}` | Meal | Updates meal record, verifying current user |

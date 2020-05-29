@@ -92,7 +92,7 @@ public class MealController {
 			@PathVariable("id") Integer id,
 			@RequestBody Meal meal) {
 		try {
-			meal = mealSvc.putMeal(id, meal);
+			meal = mealSvc.putMeal(id, principal.getName(), meal);
 			if (meal != null) {
 				res.setStatus(200);
 				return meal;

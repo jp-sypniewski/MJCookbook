@@ -12,6 +12,6 @@ public interface MealService {
 
 	Meal postMeal(String username, Meal meal);
 
-	Meal putMeal(int id, Meal meal);
+	Meal putMeal(int id, String username, Meal meal);
 
 }

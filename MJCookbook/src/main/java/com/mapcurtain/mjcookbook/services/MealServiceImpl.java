@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mapcurtain.mjcookbook.entities.Meal;
+import com.mapcurtain.mjcookbook.entities.User;
 import com.mapcurtain.mjcookbook.repositories.MealRepository;
 
 @Service
@@ -33,11 +34,39 @@ public class MealServiceImpl implements MealService {
 	
 	@Override
 	public Meal postMeal(String username, Meal meal) {
-		return null;
+		User user = new User();
+		user.setUsername(username);
+		meal.setUser(user);
+		meal = mealRepo.saveAndFlush(meal);
+		return meal;
 	}
 	
 	@Override
-	public Meal putMeal(int id, Meal meal) {
+	public Meal putMeal(int id, String username, Meal meal) {
+		Optional<Meal> opt = mealRepo.findById(id);
+		if (opt.isPresent()) {
+			Meal managedMeal = opt.get();
+			if (managedMeal.getUser().getUsername().equals(username)) {
+				if (meal.getPlannedFor() != null) {
+					managedMeal.setPlannedFor(meal.getPlannedFor());
+				}
+				if (meal.getCompleted() != null) {
+					managedMeal.setCompleted(meal.getCompleted());
+				}
+				if (meal.getRating() != null) {
+					managedMeal.setRating(meal.getRating());
+				}
+				if (meal.getRecipe() != null) {
+					managedMeal.setRecipe(meal.getRecipe());
+				}
+				if (meal.getEnabled() != null) {
+					managedMeal.setEnabled(meal.getEnabled());
+				}
+				managedMeal = mealRepo.saveAndFlush(managedMeal);
+				return managedMeal;
+				
+			}
+		}
 		return null;
 	}
 

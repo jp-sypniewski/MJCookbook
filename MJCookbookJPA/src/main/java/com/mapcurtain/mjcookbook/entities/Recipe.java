@@ -29,9 +29,6 @@ public class Recipe {
 	@Column(name="recipe_text")
 	private String recipeText;
 	
-	@Column(name="planned_for")
-	private LocalDateTime plannedFor;
-	
 	@Column(name="created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
@@ -53,14 +50,12 @@ public class Recipe {
 	}
 
 	public Recipe(int id, String title, String recipeText,
-			LocalDateTime plannedFor,
 			LocalDateTime createdAt, LocalDateTime updatedAt, User user,
 			List<User> favoritedBy) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.recipeText = recipeText;
-		this.plannedFor = plannedFor;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.user = user;
@@ -89,14 +84,6 @@ public class Recipe {
 
 	public void setRecipeText(String recipeText) {
 		this.recipeText = recipeText;
-	}
-
-	public LocalDateTime getPlannedFor() {
-		return plannedFor;
-	}
-
-	public void setPlannedFor(LocalDateTime plannedFor) {
-		this.plannedFor = plannedFor;
 	}
 
 	public LocalDateTime getCreatedAt() {

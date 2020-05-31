@@ -1,3 +1,5 @@
+<div class="container">
+
 <div *ngIf="loggedIn">
   <!-- user information display -->
   <h3>{{user.username}}</h3>
@@ -62,4 +64,6 @@
     <input type="text" name="description" [(ngModel)]="user.profile.description"><br><br>
     <button type="submit" (click)="submit()">Submit</button>
   </form>
+</div>
+
 </div>

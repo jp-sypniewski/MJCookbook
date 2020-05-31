@@ -58,6 +58,17 @@
       <input type="checkbox" name="completed" [(ngModel)]="selectedMeal.completed"><br><br>
       <button (click)="submit(selectedMeal)">Submit</button>
     </form>
+    <div *ngIf="selectedMeal.id != null">
+      <br>
+      <button (click)="showDelete = true">Delete Meal</button>
+      <div *ngIf="showDelete">
+        <br>
+        <p>Are you sure?</p>
+        <br>
+        <button (click)="disable(selectedMeal)">Yes</button>
+        <button (click)="showDelete=false">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>
 

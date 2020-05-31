@@ -1,3 +1,4 @@
+<div class="container">
 
 <!-- div for not logged into app -->
 
@@ -14,7 +15,7 @@
 
   <div>
     <h3>My Meals</h3>
-    <table>
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th>Recipe</th>
@@ -41,21 +42,23 @@
   <!-- div for single meal view, with forms for post/put -->
 
   <div *ngIf="showMealForm">
+    <hr>
     <h3>Meal Form</h3>
     <form>
-      <label for="plannedFor">Planned for:</label><br>
+      <label for="plannedFor">Planned for:</label>
       <input type="datetime-local" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
-      <label for="recipe">Recipe:</label><br>
+      <label for="recipe">Recipe:</label>
       <select name="recipe" [(ngModel)]="selectedMeal.recipe.id">
         <option *ngFor="let recipe of recipes" [value]="recipe.id">{{recipe.title}}</option>
-      </select>
+      </select><br><br>
       <!-- <input type="dropdown" name="recipe" [(ngModel)]="selectedMeal.recipe"><br><br> -->
-      <label for="rating">Rating:</label><br>
+      <label for="rating">Rating:</label>
       <input type="number" name="rating" min="1" max="5" [(ngModel)]="selectedMeal.rating"><br><br>
-      <label for="completed">Completed:</label><br>
+      <label for="completed">Completed:</label>
       <input type="checkbox" name="completed" [(ngModel)]="selectedMeal.completed"><br><br>
       <button (click)="submit(selectedMeal)">Submit</button>
     </form>
   </div>
+</div>
 
 </div>

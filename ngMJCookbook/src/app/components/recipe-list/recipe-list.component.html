@@ -1,6 +1,7 @@
+<div class="container">
 <div *ngIf="!singleView">
   <h1>{{title}}</h1>
-  <table>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th>Title</th>
@@ -31,4 +32,6 @@
     <input type="text" id="recipeText" name="recipeText" [(ngModel)]="selectedRecipe.recipeText"><br><br>
     <button (click)="submit()">Submit</button>
   </form>
+</div>
+
 </div>

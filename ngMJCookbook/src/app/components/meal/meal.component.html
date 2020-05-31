@@ -1,1 +1,49 @@
-<p>meal works!</p>
+
+<!-- div for not logged into app -->
+
+<div>
+
+</div>
+
+<!-- div to show all user meals -->
+
+<div>
+  <h3>My Meals</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Recipe</th>
+        <th>Date</th>
+        <th>Rating</th>
+        <th>Completed</th>
+        <th> - </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let meal of meals">
+        <td>{{meal.recipe.title}}</td>
+        <td>{{meal.plannedFor}}</td>
+        <td>{{meal.rating}}</td>
+        <td>{{meal.completed}}</td>
+        <td (click)="selectedMeal = meal">Edit</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="showAddNewMealForm()">Add Meal</button>
+
+</div>
+
+<!-- div for single meal view, with forms for post/put -->
+
+<div *ngIf="showMealForm">
+  <form>
+    <label for="plannedFor">Planned for:</label><br>
+    <input type="date" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
+    <label for="recipe">Recipe:</label><br>
+    <input type="dropdown" name="recipe" [(ngModel)]="selectedMeal.recipe"><br><br>
+    <label for="rating">Rating:</label><br>
+    <input type="number" name="rating" [(ngModel)]="selectedMeal.rating"><br><br>
+    <label for="completed">Completed:</label><br>
+    <input type="checkbox" name="completed" [(ngModel)]="selectedMeal.completed"><br><br>
+  </form>
+</div>

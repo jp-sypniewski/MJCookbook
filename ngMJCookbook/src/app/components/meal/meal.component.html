@@ -3,7 +3,7 @@
 
 <div *ngIf="!loggedIn">
   <h3>Please log in to see meals!</h3>
-  <button [routerLink] = "'account'" routerLinkActive="active">Log In</button>
+  <button (click)="redirectToLogIn()">Log In</button>
 </div>
 
 <!-- div if logged in -->
@@ -41,11 +41,12 @@
   <!-- div for single meal view, with forms for post/put -->
 
   <div *ngIf="showMealForm">
+    <h3>Meal Form</h3>
     <form>
       <label for="plannedFor">Planned for:</label><br>
       <input type="date" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
       <label for="recipe">Recipe:</label><br>
-      <select [(ngModel)]="selectedMeal.recipe">
+      <select name="recipe" [(ngModel)]="selectedMeal.recipe">
         <option *ngFor="let recipe of recipes" [value]="recipe">{{recipe.title}}</option>
       </select>
       <!-- <input type="dropdown" name="recipe" [(ngModel)]="selectedMeal.recipe"><br><br> -->
@@ -53,6 +54,7 @@
       <input type="number" name="rating" min="1" max="5" [(ngModel)]="selectedMeal.rating"><br><br>
       <label for="completed">Completed:</label><br>
       <input type="checkbox" name="completed" [(ngModel)]="selectedMeal.completed"><br><br>
+      <button (click)="submit(selectedMeal)">Submit</button>
     </form>
   </div>
 

@@ -1,3 +1,4 @@
+import { RecipeService } from './../../services/recipe.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MealService } from './../../services/meal.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +21,8 @@ export class MealComponent implements OnInit {
 
   constructor(private router: Router,
     private mealSvc: MealService,
-    private authSvc: AuthService) { }
+    private authSvc: AuthService,
+    private recipeSvc: RecipeService) { }
 
   ngOnInit(): void {
     this.reload();
@@ -40,14 +42,53 @@ export class MealComponent implements OnInit {
     }
   }
 
+  redirectToLogIn(){
+    this.router.navigateByUrl('account');
+  }
+
   showEditMealForm(meal: Meal){
+    this.populateRecipes();
     this.selectedMeal = meal;
     this.showMealForm = true;
   }
 
   showAddNewMealForm(){
+    this.populateRecipes();
     this.selectedMeal = new Meal();
     this.showMealForm = true;
+  }
+
+  populateRecipes(){
+    this.recipeSvc.getAllRecipes().subscribe(
+      data => {
+        this.recipes = data;
+      },
+      err => {
+        console.error('MealComponent.populateRecipes(): error getting recipes');
+      }
+    );
+  }
+
+  submit(meal: Meal){
+    if (meal.id == null){
+      this.mealSvc.postMeal(meal).subscribe(
+        data => {
+          this.reload();
+        },
+        err => {
+          console.error('MealComponent.submit(): error creating meal');
+        }
+      );
+    } else {
+      this.mealSvc.putMeal(meal).subscribe(
+        data => {
+          this.reload();
+        },
+        err => {
+          console.error('MealComponent.submit(): error updating meal');
+        }
+      );
+    }
   }
 
 }

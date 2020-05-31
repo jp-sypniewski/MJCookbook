@@ -1,3 +1,4 @@
+import { MealService } from './services/meal.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from './services/recipe.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,7 +32,8 @@ import { MealComponent } from './components/meal/meal.component';
   ],
   providers: [
     RecipeService,
-    AuthService
+    AuthService,
+    MealService
   ],
   bootstrap: [AppComponent]
 })

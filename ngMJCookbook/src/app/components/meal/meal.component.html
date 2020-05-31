@@ -44,10 +44,10 @@
     <h3>Meal Form</h3>
     <form>
       <label for="plannedFor">Planned for:</label><br>
-      <input type="date" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
+      <input type="datetime-local" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
       <label for="recipe">Recipe:</label><br>
-      <select name="recipe" [(ngModel)]="selectedMeal.recipe">
-        <option *ngFor="let recipe of recipes" [value]="recipe">{{recipe.title}}</option>
+      <select name="recipe" [(ngModel)]="selectedMeal.recipe.id">
+        <option *ngFor="let recipe of recipes" [value]="recipe.id">{{recipe.title}}</option>
       </select>
       <!-- <input type="dropdown" name="recipe" [(ngModel)]="selectedMeal.recipe"><br><br> -->
       <label for="rating">Rating:</label><br>

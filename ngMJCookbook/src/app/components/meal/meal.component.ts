@@ -55,6 +55,7 @@ export class MealComponent implements OnInit {
   showAddNewMealForm(){
     this.populateRecipes();
     this.selectedMeal = new Meal();
+    this.selectedMeal.recipe = new Recipe();
     this.showMealForm = true;
   }
 
@@ -70,6 +71,11 @@ export class MealComponent implements OnInit {
   }
 
   submit(meal: Meal){
+    console.log(meal);
+    console.log(meal.recipe);
+    if (meal.completed == null){
+      meal.completed = false;
+    }
     if (meal.id == null){
       this.mealSvc.postMeal(meal).subscribe(
         data => {

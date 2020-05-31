@@ -1,3 +1,4 @@
+import { MealService } from './services/meal.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecipeService } from './services/recipe.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,13 +12,17 @@ import { AppComponent } from './app.component';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AccountComponent } from './components/account/account.component';
+import { HomeComponent } from './components/home/home.component';
+import { MealComponent } from './components/meal/meal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipeListComponent,
     NavbarComponent,
-    AccountComponent
+    AccountComponent,
+    HomeComponent,
+    MealComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,8 @@ import { AccountComponent } from './components/account/account.component';
   ],
   providers: [
     RecipeService,
-    AuthService
+    AuthService,
+    MealService
   ],
   bootstrap: [AppComponent]
 })

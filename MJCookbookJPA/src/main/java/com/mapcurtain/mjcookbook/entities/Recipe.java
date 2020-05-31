@@ -49,7 +49,8 @@ public class Recipe {
 		super();
 	}
 
-	public Recipe(int id, String title, String recipeText, LocalDateTime createdAt, LocalDateTime updatedAt, User user,
+	public Recipe(int id, String title, String recipeText,
+			LocalDateTime createdAt, LocalDateTime updatedAt, User user,
 			List<User> favoritedBy) {
 		super();
 		this.id = id;

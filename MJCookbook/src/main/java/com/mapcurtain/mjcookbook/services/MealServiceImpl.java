@@ -37,6 +37,7 @@ public class MealServiceImpl implements MealService {
 		User user = new User();
 		user.setUsername(username);
 		meal.setUser(user);
+		meal.setEnabled(true);
 		meal = mealRepo.saveAndFlush(meal);
 		return meal;
 	}

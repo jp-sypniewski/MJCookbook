@@ -1,0 +1,61 @@
+
+<!-- div for not logged into app -->
+
+<div *ngIf="!loggedIn">
+  <h3>Please log in to see meals!</h3>
+  <button (click)="redirectToLogIn()">Log In</button>
+</div>
+
+<!-- div if logged in -->
+
+<div *ngIf="loggedIn">
+
+  <!-- div to show all user meals -->
+
+  <div>
+    <h3>My Meals</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Recipe</th>
+          <th>Date</th>
+          <th>Rating</th>
+          <th>Completed</th>
+          <th> - </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let meal of meals">
+          <td>{{meal.recipe.title}}</td>
+          <td>{{meal.plannedFor}}</td>
+          <td>{{meal.rating}}</td>
+          <td>{{meal.completed}}</td>
+          <td (click)="showEditMealForm(meal)">Edit</td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="showAddNewMealForm()">Add Meal</button>
+
+  </div>
+
+  <!-- div for single meal view, with forms for post/put -->
+
+  <div *ngIf="showMealForm">
+    <h3>Meal Form</h3>
+    <form>
+      <label for="plannedFor">Planned for:</label><br>
+      <input type="datetime-local" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
+      <label for="recipe">Recipe:</label><br>
+      <select name="recipe" [(ngModel)]="selectedMeal.recipe.id">
+        <option *ngFor="let recipe of recipes" [value]="recipe.id">{{recipe.title}}</option>
+      </select>
+      <!-- <input type="dropdown" name="recipe" [(ngModel)]="selectedMeal.recipe"><br><br> -->
+      <label for="rating">Rating:</label><br>
+      <input type="number" name="rating" min="1" max="5" [(ngModel)]="selectedMeal.rating"><br><br>
+      <label for="completed">Completed:</label><br>
+      <input type="checkbox" name="completed" [(ngModel)]="selectedMeal.completed"><br><br>
+      <button (click)="submit(selectedMeal)">Submit</button>
+    </form>
+  </div>
+
+</div>

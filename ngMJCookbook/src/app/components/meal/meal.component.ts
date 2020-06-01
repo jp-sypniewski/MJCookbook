@@ -30,8 +30,19 @@ export class MealComponent implements OnInit {
   }
 
   reload(){
+    // check if user is logged in
     if (this.authSvc.checkLogin()){
+      // set user is logged in field to true
       this.loggedIn = true;
+
+      // set other fields appropriately
+      this.meals = [];
+      this.selectedMeal = new Meal();
+      this.recipes = [];
+      this.showMealForm = false;
+      this.showDelete = false;
+
+      // get user's meals through injected service
       this.mealSvc.getMealsByUser().subscribe(
         data => {
           this.meals = data;
@@ -47,12 +58,14 @@ export class MealComponent implements OnInit {
     this.router.navigateByUrl('account');
   }
 
+  // passes an existing meal to the form
   showEditMealForm(meal: Meal){
     this.populateRecipes();
     this.selectedMeal = meal;
     this.showMealForm = true;
   }
 
+  // creates new meal and recipe objects to pass to form in prep for field selection
   showAddNewMealForm(){
     this.populateRecipes();
     this.selectedMeal = new Meal();
@@ -60,6 +73,7 @@ export class MealComponent implements OnInit {
     this.showMealForm = true;
   }
 
+  // grab all recipes to pass into meal form
   populateRecipes(){
     this.recipeSvc.getAllRecipes().subscribe(
       data => {
@@ -97,6 +111,7 @@ export class MealComponent implements OnInit {
   }
 
   disable(meal: Meal){
+    meal.enabled = false;
     this.mealSvc.putMeal(meal).subscribe(
       data => {
         this.reload();

@@ -48,10 +48,10 @@
       <label for="plannedFor">Planned for:</label>
       <input type="datetime-local" name="plannedFor" [(ngModel)]="selectedMeal.plannedFor"><br><br>
       <label for="recipe">Recipe:</label>
+      <!-- select tag only updates the recipe id -->
       <select name="recipe" [(ngModel)]="selectedMeal.recipe.id">
         <option *ngFor="let recipe of recipes" [value]="recipe.id">{{recipe.title}}</option>
       </select><br><br>
-      <!-- <input type="dropdown" name="recipe" [(ngModel)]="selectedMeal.recipe"><br><br> -->
       <label for="rating">Rating:</label>
       <input type="number" name="rating" min="1" max="5" [(ngModel)]="selectedMeal.rating"><br><br>
       <label for="completed">Completed:</label>

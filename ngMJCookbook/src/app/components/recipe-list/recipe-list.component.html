@@ -11,7 +11,7 @@
     <tbody>
       <tr *ngFor="let recipe of recipes">
         <td (click)="selectARecipe(recipe)">{{recipe.title}}</td>
-        <td>{{recipe.user.username}}</td>
+        <td>{{recipe.user.username}} ({{recipe.user.profile.firstName}} {{recipe.user.profile.lastName}})</td>
       </tr>
     </tbody>
   </table>

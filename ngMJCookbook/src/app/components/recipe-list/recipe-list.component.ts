@@ -17,6 +17,7 @@ export class RecipeListComponent implements OnInit {
   singleView: boolean = false;
   selectedRecipe: Recipe = new Recipe();
   showForm: boolean = false;
+  showDelete: Boolean = false;
 
 
 
@@ -83,6 +84,19 @@ export class RecipeListComponent implements OnInit {
     }
     // reassign it to the selected one to show the new one
     this.showForm = false;
+  }
+
+  disable(recipe: Recipe){
+    // add enabled field to recipe...
+    // recipe.enabled = false;
+    this.recipeSvc.updateRecipe(recipe).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('RecipeListComponent.disable(recipe): error disabling recipe');
+      }
+    );
   }
 
 }

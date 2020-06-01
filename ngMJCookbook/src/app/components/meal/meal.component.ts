@@ -18,6 +18,7 @@ export class MealComponent implements OnInit {
   recipes: Recipe[] = [];
   showMealForm: Boolean = false;
   loggedIn: Boolean = false;
+  showDelete: Boolean = false;
 
   constructor(private router: Router,
     private mealSvc: MealService,
@@ -29,8 +30,19 @@ export class MealComponent implements OnInit {
   }
 
   reload(){
+    // check if user is logged in
     if (this.authSvc.checkLogin()){
+      // set user is logged in field to true
       this.loggedIn = true;
+
+      // set other fields appropriately
+      this.meals = [];
+      this.selectedMeal = new Meal();
+      this.recipes = [];
+      this.showMealForm = false;
+      this.showDelete = false;
+
+      // get user's meals through injected service
       this.mealSvc.getMealsByUser().subscribe(
         data => {
           this.meals = data;
@@ -46,12 +58,14 @@ export class MealComponent implements OnInit {
     this.router.navigateByUrl('account');
   }
 
+  // passes an existing meal to the form
   showEditMealForm(meal: Meal){
     this.populateRecipes();
     this.selectedMeal = meal;
     this.showMealForm = true;
   }
 
+  // creates new meal and recipe objects to pass to form in prep for field selection
   showAddNewMealForm(){
     this.populateRecipes();
     this.selectedMeal = new Meal();
@@ -59,6 +73,7 @@ export class MealComponent implements OnInit {
     this.showMealForm = true;
   }
 
+  // grab all recipes to pass into meal form
   populateRecipes(){
     this.recipeSvc.getAllRecipes().subscribe(
       data => {
@@ -71,8 +86,6 @@ export class MealComponent implements OnInit {
   }
 
   submit(meal: Meal){
-    console.log(meal);
-    console.log(meal.recipe);
     if (meal.completed == null){
       meal.completed = false;
     }
@@ -82,7 +95,7 @@ export class MealComponent implements OnInit {
           this.reload();
         },
         err => {
-          console.error('MealComponent.submit(): error creating meal');
+          console.error('MealComponent.submit(meal): error creating meal');
         }
       );
     } else {
@@ -91,10 +104,22 @@ export class MealComponent implements OnInit {
           this.reload();
         },
         err => {
-          console.error('MealComponent.submit(): error updating meal');
+          console.error('MealComponent.submit(meal): error updating meal');
         }
       );
     }
+  }
+
+  disable(meal: Meal){
+    meal.enabled = false;
+    this.mealSvc.putMeal(meal).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('MealComponent.disable(meal): error disabling meal')
+      }
+    );
   }
 
 }

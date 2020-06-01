@@ -9,5 +9,7 @@ import com.mapcurtain.mjcookbook.entities.Meal;
 public interface MealRepository extends JpaRepository<Meal, Integer> {
 	
 	List<Meal> findByUserUsername(String username);
+	
+	List<Meal> findByUserUsernameAndEnabled(String username, Boolean enabled);
 
 }

@@ -1,34 +1,49 @@
-<div *ngIf="!singleView">
-  <h1>{{title}}</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let recipe of recipes">
-        <td (click)="selectARecipe(recipe)">{{recipe.title}}</td>
-        <td>{{recipe.user.username}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <button (click)="createNewRecipe()" >Enter New Recipe</button>
-</div>
+<div class="container">
+  <div *ngIf="!singleView">
+    <h1>{{title}}</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recipe of recipes">
+          <td (click)="selectARecipe(recipe)">{{recipe.title}}</td>
+          <td>{{recipe.user.username}} ({{recipe.user.profile.firstName}} {{recipe.user.profile.lastName}})</td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="createNewRecipe()" >Enter New Recipe</button>
+  </div>
 
-<div *ngIf="singleView">
-  <h3>{{selectedRecipe.title}}</h3>
-  <p>{{selectedRecipe.recipeText}}</p>
-  <button (click)="editRecipe()">Edit this recipe</button>
-</div>
+  <div *ngIf="singleView">
+    <h3>{{selectedRecipe.title}}</h3>
+    <p>{{selectedRecipe.recipeText}}</p>
+    <button (click)="editRecipe()">Edit this recipe</button>
+  </div>
 
-<div *ngIf="showForm">
-  <form>
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title" [(ngModel)]="selectedRecipe.title"><br><br>
-    <label for="recipeText"> Instructions:</label><br>
-    <input type="text" id="recipeText" name="recipeText" [(ngModel)]="selectedRecipe.recipeText"><br><br>
-    <button (click)="submit()">Submit</button>
-  </form>
+  <div *ngIf="showForm">
+    <h3>Recipe Form</h3>
+    <form>
+      <label for="title">Title:</label><br>
+      <input type="text" id="title" name="title" [(ngModel)]="selectedRecipe.title"><br><br>
+      <label for="recipeText"> Instructions:</label><br>
+      <input type="text" id="recipeText" name="recipeText" [(ngModel)]="selectedRecipe.recipeText"><br><br>
+      <button (click)="submit()">Submit</button>
+    </form>
+    <div *ngIf="selectedRecipe.id != null">
+      <br>
+      <button (click)="showDelete = true">Delete</button>
+      <div>
+        <br>
+        <p>Are you sure?</p>
+        <br>
+        <button (click)="disable(selectedRecipe)">Yes</button>
+        <button (click)="showDelete = false">Cancel</button>
+      </div>
+    </div>
+  </div>
+
 </div>

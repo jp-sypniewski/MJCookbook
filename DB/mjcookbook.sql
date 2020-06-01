@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS `recipe` (
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
   `user_username` VARCHAR(32) NOT NULL,
+  `enabled` TINYINT NOT NULL,
+  `status` ENUM('working', 'published') NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_recipe_user1_idx` (`user_username` ASC),
   CONSTRAINT `fk_recipe_user1`
@@ -127,6 +129,48 @@ CREATE TABLE IF NOT EXISTS `meal` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `instruction`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `instruction` ;
+
+CREATE TABLE IF NOT EXISTS `instruction` (
+  `recipe_id` INT NOT NULL,
+  `order` INT NOT NULL,
+  `text` VARCHAR(20000) NULL,
+  PRIMARY KEY (`recipe_id`, `order`),
+  INDEX `fk_instruction_recipe1_idx` (`recipe_id` ASC),
+  CONSTRAINT `fk_instruction_recipe1`
+    FOREIGN KEY (`recipe_id`)
+    REFERENCES `recipe` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ingredient`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ingredient` ;
+
+CREATE TABLE IF NOT EXISTS `ingredient` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(256) NOT NULL,
+  `amount` VARCHAR(256) NOT NULL,
+  `substitute` VARCHAR(1024) NULL,
+  `inclusion` ENUM('mandatory', 'removable', 'extra') NOT NULL,
+  `instruction_recipe_id` INT NOT NULL,
+  `instruction_order` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ingredient_instruction1_idx` (`instruction_recipe_id` ASC, `instruction_order` ASC),
+  CONSTRAINT `fk_ingredient_instruction1`
+    FOREIGN KEY (`instruction_recipe_id` , `instruction_order`)
+    REFERENCES `instruction` (`recipe_id` , `order`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS jpauser;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -145,6 +189,7 @@ START TRANSACTION;
 USE `mjcookbook`;
 INSERT INTO `profile` (`id`, `first_name`, `last_name`, `description`) VALUES (1, 'jp', 'sypniewski', 'a developer');
 INSERT INTO `profile` (`id`, `first_name`, `last_name`, `description`) VALUES (2, 'mj', 'cs', 'a cat');
+INSERT INTO `profile` (`id`, `first_name`, `last_name`, `description`) VALUES (3, 'mb', 'chandler', 'a chef');
 
 COMMIT;
 
@@ -156,6 +201,7 @@ START TRANSACTION;
 USE `mjcookbook`;
 INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`, `enabled`, `role`) VALUES ('orangeisntblue', '$2a$10$6Xfo2Hdk.PseVvxYah70Y.NN087XAh2Wr8rd8wMxs4b7Gigj9Pr7K', '2020-01-01', 1, 1, 'admin');
 INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`, `enabled`, `role`) VALUES ('mj', '$2a$10$6Xfo2Hdk.PseVvxYah70Y.NN087XAh2Wr8rd8wMxs4b7Gigj9Pr7K', '2020-01-01', 2, 1, 'user');
+INSERT INTO `user` (`username`, `password`, `created_at`, `profile_id`, `enabled`, `role`) VALUES ('mbc', '$2a$10$6Xfo2Hdk.PseVvxYah70Y.NN087XAh2Wr8rd8wMxs4b7Gigj9Pr7K', '2020-06-01', 3, 1, 'chef');
 
 COMMIT;
 
@@ -165,8 +211,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mjcookbook`;
-INSERT INTO `recipe` (`id`, `title`, `recipe_text`, `created_at`, `updated_at`, `user_username`) VALUES (1, 'pizza', 'make dough make sauce assemble bake', '2020-01-01', '2020-01-01', 'orangeisntblue');
-INSERT INTO `recipe` (`id`, `title`, `recipe_text`, `created_at`, `updated_at`, `user_username`) VALUES (2, 'turkey', 'slice up put in bowl', '2020-01-01', '2020-01-01', 'mj');
+INSERT INTO `recipe` (`id`, `title`, `recipe_text`, `created_at`, `updated_at`, `user_username`, `enabled`, `status`) VALUES (1, 'pizza', 'make dough make sauce assemble bake', '2020-01-01', '2020-01-01', 'orangeisntblue', 1, 'published');
+INSERT INTO `recipe` (`id`, `title`, `recipe_text`, `created_at`, `updated_at`, `user_username`, `enabled`, `status`) VALUES (2, 'turkey', 'slice up put in bowl', '2020-01-01', '2020-01-01', 'mj', 1, 'published');
 
 COMMIT;
 
@@ -189,6 +235,30 @@ COMMIT;
 START TRANSACTION;
 USE `mjcookbook`;
 INSERT INTO `meal` (`id`, `rating`, `completed`, `enabled`, `planned_for`, `created_at`, `updated_at`, `recipe_id`, `user_username`) VALUES (1, 5, 1, 1, '2020-05-28', '2020-05-01', '2020-05-28', 2, 'mj');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `instruction`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mjcookbook`;
+INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (1, 1, 'first instruction recipe one');
+INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (1, 2, 'second instruction recipe one');
+INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (1, 3, 'third instruction recipe one');
+INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (2, 1, 'get turkey from fridge');
+INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (2, 2, 'tear up put on floor');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `ingredient`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `mjcookbook`;
+INSERT INTO `ingredient` (`id`, `name`, `amount`, `substitute`, `inclusion`, `instruction_recipe_id`, `instruction_order`) VALUES (1, 'turkey', '1 slice', 'ham, salami', 'mandatory', 2, 1);
 
 COMMIT;
 

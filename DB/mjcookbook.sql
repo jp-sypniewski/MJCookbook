@@ -136,10 +136,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `instruction` ;
 
 CREATE TABLE IF NOT EXISTS `instruction` (
+  `id` INT NOT NULL,
   `recipe_id` INT NOT NULL,
   `order` INT NOT NULL,
-  `text` VARCHAR(20000) NULL,
-  PRIMARY KEY (`recipe_id`, `order`),
+  `text` VARCHAR(20000) NOT NULL,
+  PRIMARY KEY (`id`),
   INDEX `fk_instruction_recipe1_idx` (`recipe_id` ASC),
   CONSTRAINT `fk_instruction_recipe1`
     FOREIGN KEY (`recipe_id`)
@@ -160,13 +161,19 @@ CREATE TABLE IF NOT EXISTS `ingredient` (
   `amount` VARCHAR(256) NOT NULL,
   `substitute` VARCHAR(1024) NULL,
   `inclusion` ENUM('mandatory', 'removable', 'extra') NOT NULL,
-  `instruction_recipe_id` INT NOT NULL,
-  `instruction_order` INT NOT NULL,
+  `instruction_id` INT NOT NULL,
+  `recipe_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_ingredient_instruction1_idx` (`instruction_recipe_id` ASC, `instruction_order` ASC),
+  INDEX `fk_ingredient_instruction1_idx` (`instruction_id` ASC),
+  INDEX `fk_ingredient_recipe1_idx` (`recipe_id` ASC),
   CONSTRAINT `fk_ingredient_instruction1`
-    FOREIGN KEY (`instruction_recipe_id` , `instruction_order`)
-    REFERENCES `instruction` (`recipe_id` , `order`)
+    FOREIGN KEY (`instruction_id`)
+    REFERENCES `instruction` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ingredient_recipe1`
+    FOREIGN KEY (`recipe_id`)
+    REFERENCES `recipe` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -244,11 +251,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mjcookbook`;
-INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (1, 1, 'first instruction recipe one');
-INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (1, 2, 'second instruction recipe one');
-INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (1, 3, 'third instruction recipe one');
-INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (2, 1, 'get turkey from fridge');
-INSERT INTO `instruction` (`recipe_id`, `order`, `text`) VALUES (2, 2, 'tear up put on floor');
+INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (1, 1, 1, 'first instruction recipe one');
+INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (2, 1, 2, 'second instruction recipe one');
+INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (3, 1, 3, 'third instruction recipe one');
+INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (4, 2, 1, 'get turkey from fridge');
+INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (5, 2, 2, 'tear up put on floor');
 
 COMMIT;
 
@@ -258,7 +265,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mjcookbook`;
-INSERT INTO `ingredient` (`id`, `name`, `amount`, `substitute`, `inclusion`, `instruction_recipe_id`, `instruction_order`) VALUES (1, 'turkey', '1 slice', 'ham, salami', 'mandatory', 2, 1);
+INSERT INTO `ingredient` (`id`, `name`, `amount`, `substitute`, `inclusion`, `instruction_id`, `recipe_id`) VALUES (1, 'turkey', '1 slice', 'ham, salami', 'mandatory', 4, 2);
 
 COMMIT;
 

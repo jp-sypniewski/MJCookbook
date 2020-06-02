@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,9 +42,23 @@ public class Recipe {
 	@JoinColumn(name="user_username")
 	private User user;
 	
+	private String status;
+	
+	// start json ignore fields for not using
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy="favoriteRecipes")
 	private List<User> favoritedBy;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="recipe")
+	private List<Instruction> instructions;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="recipe")
+	private List<Ingredient> ingredients;
+	
+	// ^end json ignore recipe fields for not using
 
 	public Recipe() {
 		super();
@@ -51,7 +66,8 @@ public class Recipe {
 
 	public Recipe(int id, String title, String recipeText,
 			LocalDateTime createdAt, LocalDateTime updatedAt, User user,
-			List<User> favoritedBy) {
+			String status, List<User> favoritedBy, List<Instruction> instructions,
+			List<Ingredient> ingredients) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -59,7 +75,10 @@ public class Recipe {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.user = user;
+		this.status = status;
 		this.favoritedBy = favoritedBy;
+		this.instructions = instructions;
+		this.ingredients = ingredients;
 	}
 
 	public int getId() {
@@ -110,12 +129,36 @@ public class Recipe {
 		this.user = user;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public List<User> getFavoritedBy() {
 		return favoritedBy;
 	}
 
 	public void setFavoritedBy(List<User> favoritedBy) {
 		this.favoritedBy = favoritedBy;
+	}
+
+	public List<Instruction> getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(List<Instruction> instructions) {
+		this.instructions = instructions;
+	}
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 
 	@Override

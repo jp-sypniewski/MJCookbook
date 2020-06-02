@@ -44,7 +44,7 @@ class IngredientTest {
 
 	@Test
 	void test() {
-		assertEquals(ingredient.getId(), 5);
+		assertEquals(ingredient.getAmount(), "1 slice");
 	}
 
 }

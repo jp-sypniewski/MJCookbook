@@ -44,7 +44,7 @@ class InstructionTest {
 
 	@Test
 	void test() {
-		assertEquals(instruction.getId(), 5);
+		assertEquals(instruction.getText(), "first instruction recipe one");
 	}
 
 }

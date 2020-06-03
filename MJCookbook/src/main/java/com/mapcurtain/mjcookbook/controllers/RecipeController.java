@@ -151,20 +151,28 @@ public class RecipeController {
 	
 	// update single instruction, really only for changing instruction text
 	@PutMapping(value="recipes/{rid}/instructions/{iid}")
-	public Ingredient updateInstructions(HttpServletRequest req,
+	public Instruction updateInstruction(HttpServletRequest req,
 			HttpServletResponse res,
 			Principal principal,
 			@PathVariable("rid") Integer recipeId,
 			@PathVariable("iid") Integer instructionId,
 			@RequestBody Instruction instruction) {
 		try {
+			instruction = instructionSvc.updateInstruction(instructionId, instruction);
+			if (instruction != null) {
+				res.setStatus(200);
+				return instruction;
+			}
+			else {
+				res.setStatus(404);
+				return null;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
 			return null;
 		}
-		return null;
 	}
 	
 	
@@ -177,13 +185,21 @@ public class RecipeController {
 			@PathVariable("id") Integer id,
 			@RequestBody Ingredient ingredient) {
 		try {
+			ingredient = ingredientSvc.createIngredient(ingredient);
+			if (ingredient != null) {
+				res.setStatus(204);
+				return ingredient;
+			}
+			else {
+				res.setStatus(400);
+				return null;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
 			return null;
 		}
-		return null;
 	}
 	
 	// update single ingredient, really only for name/amount/instruction changes
@@ -195,13 +211,20 @@ public class RecipeController {
 			@PathVariable("iid") Integer ingredientId,
 			@RequestBody Ingredient ingredient) {
 		try {
-			
+			ingredient = ingredientSvc.updateIngredient(ingredientId, ingredient);
+			if (ingredient != null) {
+				res.setStatus(200);
+				return ingredient;
+			}
+			else {
+				res.setStatus(404);
+				return null;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
 			return null;
 		}
-		return null;
 	}
 
 }

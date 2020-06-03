@@ -68,6 +68,7 @@ public class InstructionServiceImpl implements InstructionService {
 			Instruction managedInstruction = opt.get();
 			managedInstruction.setText(instruction.getText());
 			managedInstruction = instructionRepo.saveAndFlush(managedInstruction);
+			return managedInstruction;
 		}
 		return null;
 	}

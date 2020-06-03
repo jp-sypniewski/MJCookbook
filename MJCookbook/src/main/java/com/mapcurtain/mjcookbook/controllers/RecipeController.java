@@ -119,19 +119,34 @@ public class RecipeController {
 	// takes in full list of instructions to replace old list
 	// needs to reassign ingredients to instructions as needed before performing delete
 	@PostMapping(value="recipes/{id}/instructions")
-	public List<Instruction> updateRecipeInstructionsWithOrder(HttpServletRequest req,
+	public Recipe updateRecipeInstructionsWithOrder(HttpServletRequest req,
 			HttpServletResponse res,
 			Principal principal,
-			@PathVariable("id") Integer id,
+			@PathVariable("id") Integer recipeId,
 			@RequestBody List<Instruction> instructions){
 		try {
-			
+			// perform exchange of instructions
+			if (instructionSvc.makeNewInstructionsForRecipe(recipeId, instructions)) {
+				// if exchange worked then grab that recipe and send it back
+				Recipe recipe = recipeSvc.getOneRecipe(recipeId);
+				if (recipe != null) {
+					res.setStatus(201);
+					return recipe;
+				}
+				else {
+					res.setStatus(404);
+					return null;
+				}
+			}
+			else {
+				res.setStatus(400);
+				return null;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
 			return null;
 		}
-		return null;
 	}
 	
 	// update single instruction, really only for changing instruction text

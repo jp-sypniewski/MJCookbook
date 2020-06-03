@@ -1,6 +1,7 @@
 package com.mapcurtain.mjcookbook;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,7 +35,7 @@ class RecipeTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		recipe = em.find(Recipe.class, 1);
+		recipe = em.find(Recipe.class, 2);
 	}
 
 	@AfterEach
@@ -45,9 +46,15 @@ class RecipeTest {
 
 	@Test
 	void test() {
+		/*
+		 * tests for id == 1
+		 * 
 		assertEquals(recipe.getTitle(), "pizza");
 		assertEquals(recipe.getUser().getUsername(), "orangeisntblue");
 		assertEquals(recipe.getFavoritedBy().size(), 2);
+		*/
+		assertTrue(recipe.getInstructions().size() > 0);
+		assertTrue(recipe.getIngredients().size() > 0);
 
 	}
 

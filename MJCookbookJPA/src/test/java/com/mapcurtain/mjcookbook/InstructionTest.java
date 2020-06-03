@@ -1,7 +1,6 @@
 package com.mapcurtain.mjcookbook;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,14 +12,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.mapcurtain.mjcookbook.entities.Recipe;
-import com.mapcurtain.mjcookbook.entities.User;
+import com.mapcurtain.mjcookbook.entities.Instruction;
 
-class RecipeTest {
-	
+class InstructionTest {
+
 	private EntityManager em;
 	private static EntityManagerFactory emf;
-	private Recipe recipe;
+	private Instruction instruction;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -35,27 +33,18 @@ class RecipeTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		recipe = em.find(Recipe.class, 2);
+		instruction = em.find(Instruction.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		recipe = null;
+		instruction = null;
 	}
 
 	@Test
 	void test() {
-		/*
-		 * tests for id == 1
-		 * 
-		assertEquals(recipe.getTitle(), "pizza");
-		assertEquals(recipe.getUser().getUsername(), "orangeisntblue");
-		assertEquals(recipe.getFavoritedBy().size(), 2);
-		*/
-		assertTrue(recipe.getInstructions().size() > 0);
-		assertTrue(recipe.getIngredients().size() > 0);
-
+		assertEquals(instruction.getText(), "first instruction recipe one");
 	}
 
 }

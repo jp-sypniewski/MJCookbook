@@ -21,6 +21,31 @@
   <div *ngIf="singleView">
     <h3>{{selectedRecipe.title}}</h3>
     <p>{{selectedRecipe.recipeText}}</p>
+    <div *ngIf="selectedRecipe.instructions.length > 0">
+      <h4>Instructions</h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Sequence</th>
+            <th>Actions</th>
+            <th>Ingredients</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let instruction of selectedRecipe.instructions">
+            <td>{{instruction.sequence}}</td>
+            <td>{{instruction.text}}</td>
+            <td>
+              <span *ngFor="let ingredient of instruction.ingredients">
+                <em>{{ingredient.name}}</em>
+                ({{ingredient.amount}})
+                [can sub: {{ingredient.substitute}}]
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <button (click)="editRecipe()">Edit this recipe</button>
   </div>
 

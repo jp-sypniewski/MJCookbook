@@ -178,16 +178,17 @@ public class RecipeController {
 	
 	
 	// this endpoint should make it easier to "add an ingredient" to an existing recipe
-	@PostMapping(value="recipes/{id}/ingredients")
+	@PostMapping(value="recipes/{rid}/instructions/{iid}/ingredients")
 	public Ingredient addIngredient(HttpServletRequest req,
 			HttpServletResponse res,
 			Principal principal,
-			@PathVariable("id") Integer id,
+			@PathVariable("rid") Integer recipeId,
+			@PathVariable("iid") Integer instructionId,
 			@RequestBody Ingredient ingredient) {
 		try {
-			ingredient = ingredientSvc.createIngredient(ingredient);
+			ingredient = ingredientSvc.createIngredient(instructionId, recipeId, ingredient);
 			if (ingredient != null) {
-				res.setStatus(204);
+				res.setStatus(201);
 				return ingredient;
 			}
 			else {

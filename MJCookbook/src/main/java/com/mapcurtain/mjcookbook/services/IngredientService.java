@@ -4,7 +4,7 @@ import com.mapcurtain.mjcookbook.entities.Ingredient;
 
 public interface IngredientService {
 
-	Ingredient createIngredient(Ingredient ingredient);
+	Ingredient createIngredient(int instructionId, int recipeId, Ingredient ingredient);
 
 	Ingredient updateIngredient(int ingredientId, Ingredient ingredient);
 

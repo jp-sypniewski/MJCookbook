@@ -42,6 +42,8 @@ public class Recipe {
 	@JoinColumn(name="user_username")
 	private User user;
 	
+	private Boolean enabled;
+	
 	private String status;
 	
 	// start json ignore fields for not using
@@ -65,7 +67,7 @@ public class Recipe {
 	}
 
 	public Recipe(int id, String title, String recipeText,
-			LocalDateTime createdAt, LocalDateTime updatedAt, User user,
+			LocalDateTime createdAt, LocalDateTime updatedAt, User user, Boolean enabled,
 			String status, List<User> favoritedBy, List<Instruction> instructions,
 			List<Ingredient> ingredients) {
 		super();
@@ -75,6 +77,7 @@ public class Recipe {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.user = user;
+		this.enabled = enabled;
 		this.status = status;
 		this.favoritedBy = favoritedBy;
 		this.instructions = instructions;
@@ -127,6 +130,14 @@ public class Recipe {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getStatus() {

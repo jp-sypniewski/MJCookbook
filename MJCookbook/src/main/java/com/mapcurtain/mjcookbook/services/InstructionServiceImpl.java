@@ -39,6 +39,7 @@ public class InstructionServiceImpl implements InstructionService {
 					recipe.setId(recipeId);
 					instruction.setRecipe(recipe);
 				}
+				// need logic checks for instruction
 				instruction = instructionRepo.saveAndFlush(instruction);
 				for (Ingredient ingredient : instruction.getIngredients()) {
 					if (ingredient.getRecipe() == null) {
@@ -49,6 +50,7 @@ public class InstructionServiceImpl implements InstructionService {
 					if (ingredient.getInstruction() == null) {
 						ingredient.setInstruction(instruction);
 					}
+					// need logic checks for ingredient
 					ingredientRepo.saveAndFlush(ingredient);
 				}
 			}

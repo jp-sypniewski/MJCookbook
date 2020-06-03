@@ -25,6 +25,7 @@ public class IngredientServiceImpl implements IngredientService {
 		recipe.setId(recipeId);
 		ingredient.setInstruction(instruction);
 		ingredient.setRecipe(recipe);
+		// need logic checks for new ingredient (enums in db)
 		ingredient = ingredientRepo.saveAndFlush(ingredient);
 		return ingredient;
 	}

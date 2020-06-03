@@ -116,7 +116,8 @@ public class RecipeController {
 		}
 	}
 	
-	
+	// takes in full list of instructions to replace old list
+	// needs to reassign ingredients to instructions as needed before performing delete
 	@PostMapping(value="recipes/{id}/instructions")
 	public List<Instruction> updateRecipeInstructionsWithOrder(HttpServletRequest req,
 			HttpServletResponse res,
@@ -133,7 +134,7 @@ public class RecipeController {
 		return null;
 	}
 	
-	
+	// update single instruction, really only for changing instruction text
 	@PutMapping(value="recipes/{rid}/instructions/{iid}")
 	public Ingredient updateInstructions(HttpServletRequest req,
 			HttpServletResponse res,
@@ -152,6 +153,8 @@ public class RecipeController {
 	}
 	
 	
+	
+	// this endpoint should make it easier to "add an ingredient" to an existing recipe
 	@PostMapping(value="recipes/{id}/ingredients")
 	public Ingredient addIngredient(HttpServletRequest req,
 			HttpServletResponse res,
@@ -168,7 +171,7 @@ public class RecipeController {
 		return null;
 	}
 	
-	
+	// update single ingredient, really only for name/amount/instruction changes
 	@PutMapping(value="recipes/{rid}/ingredients/{iid}")
 	public Ingredient updateIngredient(HttpServletRequest req,
 			HttpServletResponse res,

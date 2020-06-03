@@ -20,12 +20,20 @@ import com.mapcurtain.mjcookbook.entities.Ingredient;
 import com.mapcurtain.mjcookbook.entities.Instruction;
 import com.mapcurtain.mjcookbook.entities.Recipe;
 import com.mapcurtain.mjcookbook.entities.User;
+import com.mapcurtain.mjcookbook.services.IngredientService;
+import com.mapcurtain.mjcookbook.services.InstructionService;
 import com.mapcurtain.mjcookbook.services.RecipeService;
 
 @RestController
 @RequestMapping("api")
 @CrossOrigin({"*", "http://localhost:4200"})
 public class RecipeController {
+	
+	@Autowired
+	private IngredientService ingredientSvc;
+	
+	@Autowired
+	private InstructionService instructionSvc;
 	
 	@Autowired
 	private RecipeService recipeSvc;
@@ -115,6 +123,13 @@ public class RecipeController {
 			Principal principal,
 			@PathVariable("id") Integer id,
 			@RequestBody List<Instruction> instructions){
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 		return null;
 	}
 	
@@ -126,6 +141,13 @@ public class RecipeController {
 			@PathVariable("rid") Integer recipeId,
 			@PathVariable("iid") Integer instructionId,
 			@RequestBody Instruction instruction) {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 		return null;
 	}
 	
@@ -136,6 +158,13 @@ public class RecipeController {
 			Principal principal,
 			@PathVariable("id") Integer id,
 			@RequestBody Ingredient ingredient) {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 		return null;
 	}
 	
@@ -147,6 +176,13 @@ public class RecipeController {
 			@PathVariable("rid") Integer recipeId,
 			@PathVariable("iid") Integer ingredientId,
 			@RequestBody Ingredient ingredient) {
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			return null;
+		}
 		return null;
 	}
 

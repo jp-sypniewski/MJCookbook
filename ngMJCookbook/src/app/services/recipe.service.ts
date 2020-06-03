@@ -68,6 +68,42 @@ export class RecipeService {
     );
   }
 
+  disableRecipe(recipe: Recipe){
+    recipe.enabled = false;
+    const credentials = this.authSvc.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.put<Recipe>(this.baseUrl + 'api/recipes/' + recipe.id, recipe, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('RecipeService.disableRecipe(): error updating recipe.');
+      })
+    );
+  }
+
+  enableRecipe(recipe: Recipe){
+    recipe.enabled = true;
+    const credentials = this.authSvc.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.put<Recipe>(this.baseUrl + 'api/recipes/' + recipe.id, recipe, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('RecipeService.disableRecipe(): error updating recipe.');
+      })
+    );
+  }
+
   updateInstructionsAndIngredients(recipe: Recipe){
     const credentials = this.authSvc.getCredentials();
     const httpOptions = {

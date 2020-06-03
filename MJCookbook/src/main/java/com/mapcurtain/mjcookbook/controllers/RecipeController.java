@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mapcurtain.mjcookbook.entities.Ingredient;
+import com.mapcurtain.mjcookbook.entities.Instruction;
 import com.mapcurtain.mjcookbook.entities.Recipe;
 import com.mapcurtain.mjcookbook.entities.User;
 import com.mapcurtain.mjcookbook.services.RecipeService;
@@ -107,5 +109,45 @@ public class RecipeController {
 	}
 	
 	
+	@PostMapping(value="recipes/{id}/instructions")
+	public List<Instruction> updateRecipeInstructionsWithOrder(HttpServletRequest req,
+			HttpServletResponse res,
+			Principal principal,
+			@PathVariable("id") Integer id,
+			@RequestBody List<Instruction> instructions){
+		return null;
+	}
+	
+	
+	@PutMapping(value="recipes/{rid}/instructions/{iid}")
+	public Ingredient updateInstructions(HttpServletRequest req,
+			HttpServletResponse res,
+			Principal principal,
+			@PathVariable("rid") Integer recipeId,
+			@PathVariable("iid") Integer instructionId,
+			@RequestBody Instruction instruction) {
+		return null;
+	}
+	
+	
+	@PostMapping(value="recipes/{id}/ingredients")
+	public Ingredient addIngredient(HttpServletRequest req,
+			HttpServletResponse res,
+			Principal principal,
+			@PathVariable("id") Integer id,
+			@RequestBody Ingredient ingredient) {
+		return null;
+	}
+	
+	
+	@PutMapping(value="recipes/{rid}/ingredients/{iid}")
+	public Ingredient updateIngredient(HttpServletRequest req,
+			HttpServletResponse res,
+			Principal principal,
+			@PathVariable("rid") Integer recipeId,
+			@PathVariable("iid") Integer ingredientId,
+			@RequestBody Ingredient ingredient) {
+		return null;
+	}
 
 }

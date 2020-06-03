@@ -52,11 +52,9 @@ public class Recipe {
 	@ManyToMany(mappedBy="favoriteRecipes")
 	private List<User> favoritedBy;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="recipe")
 	private List<Instruction> instructions;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="recipe")
 	private List<Ingredient> ingredients;
 	

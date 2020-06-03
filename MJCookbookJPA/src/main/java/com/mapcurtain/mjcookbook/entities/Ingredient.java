@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Ingredient {
 	
@@ -22,10 +24,12 @@ public class Ingredient {
 	
 	private String inclusion;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="instruction_id")
 	private Instruction instruction;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="recipe_id")
 	private Recipe recipe;

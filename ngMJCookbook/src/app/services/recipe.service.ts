@@ -86,5 +86,24 @@ export class RecipeService {
     );
   }
 
+  updateSingleInstruction(recipeId: Number, instruction: Instruction){
+    const credentials = this.authSvc.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.put<Instruction>(this.baseUrl + 'api/recipes/' +
+      recipeId + '/instructions/' + instruction.id, instruction, httpOptions)
+      .pipe(
+        catchError((err:any) => {
+          console.log(err);
+          return throwError('RecipeService.updateSingleInstruction(): error with single inst update');
+        }
+      )
+    );
+  }
+
 
 }

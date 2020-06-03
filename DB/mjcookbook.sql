@@ -136,9 +136,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `instruction` ;
 
 CREATE TABLE IF NOT EXISTS `instruction` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `recipe_id` INT NOT NULL,
-  `order` INT NOT NULL,
+  `sequence` INT NOT NULL,
   `text` VARCHAR(20000) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_instruction_recipe1_idx` (`recipe_id` ASC),
@@ -251,11 +251,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mjcookbook`;
-INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (1, 1, 1, 'first instruction recipe one');
-INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (2, 1, 2, 'second instruction recipe one');
-INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (3, 1, 3, 'third instruction recipe one');
-INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (4, 2, 1, 'get turkey from fridge');
-INSERT INTO `instruction` (`id`, `recipe_id`, `order`, `text`) VALUES (5, 2, 2, 'tear up put on floor');
+INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (1, 1, 1, 'first instruction recipe one');
+INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (2, 1, 2, 'second instruction recipe one');
+INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (3, 1, 3, 'third instruction recipe one');
+INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (4, 2, 1, 'get turkey from fridge');
+INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (5, 2, 2, 'tear up put on floor');
 
 COMMIT;
 

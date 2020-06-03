@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mapcurtain.mjcookbook.entities.Ingredient;
 import com.mapcurtain.mjcookbook.entities.Instruction;
+import com.mapcurtain.mjcookbook.entities.Recipe;
 import com.mapcurtain.mjcookbook.repositories.IngredientRepository;
 import com.mapcurtain.mjcookbook.repositories.InstructionRepository;
 
@@ -20,6 +22,7 @@ public class InstructionServiceImpl implements InstructionService {
 	@Autowired
 	private InstructionRepository instructionRepo;
 	
+	@Transactional
 	@Override
 	public boolean makeNewInstructionsForRecipe(int recipeId, List<Instruction> instructions) {
 		try {
@@ -31,8 +34,21 @@ public class InstructionServiceImpl implements InstructionService {
 			
 			// add the new instructions
 			for(Instruction instruction : instructions) {
-				instructionRepo.saveAndFlush(instruction);
+				if (instruction.getRecipe() == null) {
+					Recipe recipe = new Recipe();
+					recipe.setId(recipeId);
+					instruction.setRecipe(recipe);
+				}
+				instruction = instructionRepo.saveAndFlush(instruction);
 				for (Ingredient ingredient : instruction.getIngredients()) {
+					if (ingredient.getRecipe() == null) {
+						Recipe recipe = new Recipe();
+						recipe.setId(recipeId);
+						ingredient.setRecipe(recipe);
+					}
+					if (ingredient.getInstruction() == null) {
+						ingredient.setInstruction(instruction);
+					}
 					ingredientRepo.saveAndFlush(ingredient);
 				}
 			}

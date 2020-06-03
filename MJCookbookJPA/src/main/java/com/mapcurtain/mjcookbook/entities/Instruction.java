@@ -24,7 +24,7 @@ public class Instruction {
 	@JoinColumn(name="recipe_id")
 	private Recipe recipe;
 	
-	private int order;
+	private int sequence;
 	
 	private String text;
 	
@@ -35,11 +35,11 @@ public class Instruction {
 		super();
 	}
 
-	public Instruction(int id, Recipe recipe, int order, String text, List<Ingredient> ingredients) {
+	public Instruction(int id, Recipe recipe, int sequence, String text, List<Ingredient> ingredients) {
 		super();
 		this.id = id;
 		this.recipe = recipe;
-		this.order = order;
+		this.sequence = sequence;
 		this.text = text;
 		this.ingredients = ingredients;
 	}
@@ -60,12 +60,12 @@ public class Instruction {
 		this.recipe = recipe;
 	}
 
-	public int getOrder() {
-		return order;
+	public int getSequence() {
+		return sequence;
 	}
 
-	public void setOrder(int order) {
-		this.order = order;
+	public void setSequence(int sequence) {
+		this.sequence = sequence;
 	}
 
 	public String getText() {

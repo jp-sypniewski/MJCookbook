@@ -1,3 +1,4 @@
+import { Ingredient } from './../models/ingredient';
 import { Instruction } from './../models/instruction';
 import { AuthService } from './auth.service';
 import { Recipe } from 'src/app/models/recipe';
@@ -100,6 +101,46 @@ export class RecipeService {
         catchError((err:any) => {
           console.log(err);
           return throwError('RecipeService.updateSingleInstruction(): error with single inst update');
+        }
+      )
+    );
+  }
+
+  addIngredient(recipeId: Number, instructionId: Number, ingredient: Ingredient){
+    const credentials = this.authSvc.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.post<Ingredient>(this.baseUrl + 'api/recipes/' +
+      recipeId + '/instructions/' + instructionId + '/ingredients',
+      ingredient, httpOptions)
+      .pipe(
+        catchError((err:any) => {
+          console.log(err);
+          return throwError('RecipeService.addIngredient(): error adding new ingredient');
+        }
+      )
+    );
+  }
+
+  updateSingleIngredient(recipeId: Number, ingredient: Ingredient){
+    const credentials = this.authSvc.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${credentials}`
+      })
+    };
+    return this.http.put<Ingredient>(this.baseUrl + 'api/recipes/' +
+      recipeId + '/ingredients/' + ingredient.id,
+      ingredient, httpOptions)
+      .pipe(
+        catchError((err:any) => {
+          console.log(err);
+          return throwError('RecipeService.updateSingleIngredient(): error adding new ingredient');
         }
       )
     );

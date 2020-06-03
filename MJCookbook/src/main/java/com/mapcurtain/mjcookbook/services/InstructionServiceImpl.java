@@ -6,11 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mapcurtain.mjcookbook.entities.Ingredient;
 import com.mapcurtain.mjcookbook.entities.Instruction;
+import com.mapcurtain.mjcookbook.repositories.IngredientRepository;
 import com.mapcurtain.mjcookbook.repositories.InstructionRepository;
 
 @Service
 public class InstructionServiceImpl implements InstructionService {
+	
+	@Autowired
+	private IngredientRepository ingredientRepo;
 	
 	@Autowired
 	private InstructionRepository instructionRepo;
@@ -18,12 +23,20 @@ public class InstructionServiceImpl implements InstructionService {
 	@Override
 	public boolean makeNewInstructionsForRecipe(int recipeId, List<Instruction> instructions) {
 		try {
-			// delete existing instructions for recipe
+			List<Ingredient> previousIngredients = ingredientRepo.findByRecipeId(recipeId);
+			ingredientRepo.deleteByRecipeId(recipeId);
+			
+			List<Instruction> previousInstructions = instructionRepo.findByRecipeId(recipeId);
 			instructionRepo.deleteByRecipeId(recipeId);
-			// add each instruction back
+			
+			// add the new instructions
 			for(Instruction instruction : instructions) {
 				instructionRepo.saveAndFlush(instruction);
+				for (Ingredient ingredient : instruction.getIngredients()) {
+					ingredientRepo.saveAndFlush(ingredient);
+				}
 			}
+			
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

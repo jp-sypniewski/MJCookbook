@@ -14,13 +14,13 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class RecipeListComponent implements OnInit {
 
-  title: string = "Recipe List";
   recipes: Recipe[] = [];
   singleView: boolean = false;
   selectedRecipe: Recipe = new Recipe();
   showRecipeForm: boolean = false;
   showDelete: Boolean = false;
   showInstructionsEdit: boolean = false;
+  instructionsForEdit: Instruction[] = [];
 
   constructor(private router: Router,
     private authSvc: AuthService,
@@ -94,6 +94,16 @@ export class RecipeListComponent implements OnInit {
         console.error('RecipeListComponent.disable(recipe): error disabling recipe');
       }
     );
+  }
+
+  showEditInstructions(){
+    this.instructionsForEdit = this.selectedRecipe.instructions;
+    this.showInstructionsEdit = true;
+  }
+
+  cancelEditInstructions(){
+    this.instructionsForEdit = [];
+    this.showInstructionsEdit = false;
   }
 
   drop(event: CdkDragDrop<Instruction[]>) {

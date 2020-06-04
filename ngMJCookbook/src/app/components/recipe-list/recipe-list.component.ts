@@ -97,8 +97,14 @@ export class RecipeListComponent implements OnInit {
   }
 
   showEditInstructions(){
-    this.instructionsForEdit = this.selectedRecipe.instructions;
+    this.instructionsForEdit = this.copyInstructions(this.selectedRecipe.instructions);
     this.showInstructionsEdit = true;
+  }
+
+  copyInstructions(instructions: Instruction[]){
+    var copied: Instruction[];
+    copied = JSON.parse(JSON.stringify(instructions));
+    return copied;
   }
 
   cancelEditInstructions(){
@@ -107,7 +113,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Instruction[]>) {
-    moveItemInArray(this.selectedRecipe.instructions, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.instructionsForEdit, event.previousIndex, event.currentIndex);
   }
 
 }

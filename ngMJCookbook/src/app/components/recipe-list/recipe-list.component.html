@@ -51,6 +51,8 @@
       </table>
     </div>
     <button (click)="editRecipe()">Edit this recipe</button>
+    <br>
+    <button (click)="showInstructionsEdit = true">Edit these instructions</button>
   </div>
 
   <div *ngIf="showRecipeForm">
@@ -76,9 +78,11 @@
   </div>
 
   <div *ngIf="showInstructionsEdit">
-    <div>
+    <div cdkDropList class="">
+      <div class="" *ngFor="let instruction of selectedRecipe.instructions" cdkDrag>{{instruction.text}}</div>
       <!-- a div for the list drag and drop thing! -->
     </div>
+    <button (click)="showInstructionsEdit = false">Cancel</button>
   </div>
 
 </div>

@@ -16,12 +16,9 @@ export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
   singleView: boolean = false;
   selectedRecipe: Recipe = new Recipe();
-  showForm: boolean = false;
+  showRecipeForm: boolean = false;
   showDelete: Boolean = false;
-
-
-
-
+  showInstructionsEdit: boolean = false;
 
   constructor(private router: Router,
     private authSvc: AuthService,
@@ -50,15 +47,15 @@ export class RecipeListComponent implements OnInit {
   }
 
   editRecipe(){
-    this.showForm = true;
+    this.showRecipeForm = true;
   }
 
   createNewRecipe(){
     this.selectedRecipe = new Recipe();
-    this.showForm = true;
+    this.showRecipeForm = true;
   }
 
-  submit(){
+  submitRecipe(){
     if (this.selectedRecipe.id != null){
       // if it has an id, then submit the put
       this.recipeSvc.updateRecipe(this.selectedRecipe).subscribe(
@@ -83,13 +80,11 @@ export class RecipeListComponent implements OnInit {
       );
     }
     // reassign it to the selected one to show the new one
-    this.showForm = false;
+    this.showRecipeForm = false;
   }
 
   disable(recipe: Recipe){
-    // add enabled field to recipe...
-    // recipe.enabled = false;
-    this.recipeSvc.updateRecipe(recipe).subscribe(
+    this.recipeSvc.disableRecipe(recipe).subscribe(
       data => {
         this.reload();
       },

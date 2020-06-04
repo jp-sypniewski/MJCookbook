@@ -6,12 +6,16 @@
         <tr>
           <th>Title</th>
           <th>Author</th>
+          <th>Time</th>
+          <th>Rating</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let recipe of recipes">
           <td (click)="selectARecipe(recipe)">{{recipe.title}}</td>
           <td>{{recipe.user.username}} ({{recipe.user.profile.firstName}} {{recipe.user.profile.lastName}})</td>
+          <td>(**some amount of time**)</td>
+          <td>(**some amount of rating**)</td>
         </tr>
       </tbody>
     </table>
@@ -49,14 +53,14 @@
     <button (click)="editRecipe()">Edit this recipe</button>
   </div>
 
-  <div *ngIf="showForm">
+  <div *ngIf="showRecipeForm">
     <h3>Recipe Form</h3>
     <form>
       <label for="title">Title:</label><br>
       <input type="text" id="title" name="title" [(ngModel)]="selectedRecipe.title"><br><br>
       <label for="recipeText"> Instructions:</label><br>
       <input type="text" id="recipeText" name="recipeText" [(ngModel)]="selectedRecipe.recipeText"><br><br>
-      <button (click)="submit()">Submit</button>
+      <button (click)="submitRecipe()">Submit</button>
     </form>
     <div *ngIf="selectedRecipe.id != null">
       <br>
@@ -68,6 +72,12 @@
         <button (click)="disable(selectedRecipe)">Yes</button>
         <button (click)="showDelete = false">Cancel</button>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="showInstructionsEdit">
+    <div>
+      <!-- a div for the list drag and drop thing! -->
     </div>
   </div>
 

@@ -1,9 +1,11 @@
+import { Instruction } from './../../models/instruction';
 import { RecipeService } from './../../services/recipe.service';
 import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/models/recipe';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-recipe-list',
@@ -92,6 +94,10 @@ export class RecipeListComponent implements OnInit {
         console.error('RecipeListComponent.disable(recipe): error disabling recipe');
       }
     );
+  }
+
+  drop(event: CdkDragDrop<Instruction[]>) {
+    moveItemInArray(this.selectedRecipe.instructions, event.previousIndex, event.currentIndex);
   }
 
 }

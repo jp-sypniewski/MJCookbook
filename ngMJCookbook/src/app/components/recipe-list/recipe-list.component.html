@@ -78,7 +78,7 @@
   </div>
 
   <div *ngIf="showInstructionsEdit">
-    <div cdkDropList class="">
+    <div cdkDropList class="" (cdkDropListDropped)="drop($event)">
       <div class="" *ngFor="let instruction of selectedRecipe.instructions" cdkDrag>{{instruction.text}}</div>
       <!-- a div for the list drag and drop thing! -->
     </div>

@@ -12,7 +12,7 @@ v0.0 Literally just recipes as written text.  The user logs in, can view the lis
 
 ### Application Technologies
 
-* Spring RESTful API, Spring Data JPA, MySQL
+* Spring RESTful API, Spring Security, Spring Data JPA, MySQL
 * Angular9
 * Languages: Java, Typescript, Javascript, HTML, CSS, SQL
 
@@ -35,27 +35,28 @@ v0.0 Literally just recipes as written text.  The user logs in, can view the lis
 * Allowing a simple UI to update the instructions/ingredients combo required the DragDrop module, which is an awesome option to have for later features
 
 ### Endpoints
-| Path | Object | Details |
-|--|--|--|
-| GET `/authenticate` | Principal | Logs (pre-existing) user in |
-| POST `/register` | User | Creates new user |
-| PUT `/update` | User | Updates existing user|
-| GET `api/recipes` | List\<Recipe> | Gets list of all recipes |
-| POST `api/recipes` | Recipe | Creates recipe record |
-| PUT `api/recipes/{id}` | Recipe | Updates recipe record |
-| GET `api/meals` | List\<Meal> | Gets list of meals for current user |
-| GET `api/meals/{id}` | Meal | Get meal by id |
-| POST `api/meals` | Meal | Create meal record for current user |
-| PUT `api/meals/{id}` | Meal | Updates meal record, verifying current user |
-| POST `api/recipes/{id}/instructions` | Recipe | Creates new instructions and ingredients within recipe |
-| PUT `api/recipes/{rid}/instructions/{iid}` | Instruction | Updates single instruction record |
-| POST `api/recipes/{rid}/instructions/{iid}/ingredients`| Ingredient | Creates an ingredient and adds to an instruction |
-| PUT `api/recipes/{rid}/ingredients/{iid}` | Ingredient | Updates single ingredient record |
+| Type | Path | Object | Details |
+|--|--|--|--|
+| GET | `/authenticate` | Principal | Logs (pre-existing) user in |
+| POST | `/register` | User | Creates new user |
+| PUT | `/update` | User | Updates existing user|
+| GET | `api/recipes` | List\<Recipe> | Gets list of all recipes |
+| POST | `api/recipes` | Recipe | Creates recipe record |
+| PUT | `api/recipes/{id}` | Recipe | Updates recipe record |
+| GET | `api/meals` | List\<Meal> | Gets list of meals for current user |
+| GET | `api/meals/{id}` | Meal | Get meal by id |
+| POST | `api/meals` | Meal | Create meal record for current user |
+| PUT | `api/meals/{id}` | Meal | Updates meal record, verifying current user |
+| POST | `api/recipes/{id}/instructions` | Recipe | Creates new instructions and ingredients within recipe |
+| PUT | `api/recipes/{rid}/instructions/{iid}` | Instruction | Updates single instruction record |
+| POST | `api/recipes/{rid}/instructions/{iid}/ingredients`| Ingredient | Creates an ingredient and adds to an instruction |
+| PUT | `api/recipes/{rid}/ingredients/{iid}` | Ingredient | Updates single ingredient record |
 
 ### Ideas
 
 * Add in a social aspect (favorite recipes, leaving notes/messages for others)
 * Add in timers and alerts for instructions
+* Add Alexa for recipes/timers/alerts
 * Add 'helpful advice' within recipes (see: stackoverflow)
 * Meal planning (nutritionist user-type, pre-planned diets)
 * Food purchasing export for meal/meal[]

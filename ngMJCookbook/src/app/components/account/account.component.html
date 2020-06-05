@@ -17,7 +17,7 @@
       <td>{{user.profile.description}}</td>
     </tr>
   </table>
-  <button (click)="showEdit = true">Edit User Info</button>
+  <button type="button" class="btn btn-secondary" (click)="showEdit = true">Edit User Info</button>
   <!-- edit user form -->
   <div *ngIf="showEdit">
     <form>
@@ -31,7 +31,7 @@
       <input type="text" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
       <label for="description"> Description:</label><br>
       <input type="text" name="description" [(ngModel)]="user.profile.description"><br><br>
-      <button (click)="update()">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="update()">Submit</button>
     </form>
   </div>
 
@@ -46,7 +46,7 @@
     <input type="text" name="username" ngModel><br><br>
     <label for="password">Password:</label><br>
     <input type="password" name="password" ngModel><br><br>
-    <button type="submit" (click)="logIn(login)">Login</button>
+    <button type="submit" class="btn btn-success" (click)="logIn(login)">Login</button>
   </form>
   <br><hr><br>
   <!-- new user form -->
@@ -62,7 +62,7 @@
     <input type="text" name="lastName" [(ngModel)]="user.profile.lastName"><br><br>
     <label for="description"> Description:</label><br>
     <input type="text" name="description" [(ngModel)]="user.profile.description"><br><br>
-    <button type="submit" (click)="submit()">Submit</button>
+    <button type="submit" class="btn btn-success" (click)="submit()">Submit</button>
   </form>
 </div>
 

@@ -4,7 +4,7 @@
 
 <div *ngIf="!loggedIn">
   <h3>Please log in to see meals!</h3>
-  <button (click)="redirectToLogIn()">Log In</button>
+  <button type="button" class="btn btn-primary" (click)="redirectToLogIn()">Log In</button>
 </div>
 
 <!-- div if logged in -->
@@ -31,11 +31,13 @@
           <td>{{meal.plannedFor}}</td>
           <td>{{meal.rating}}</td>
           <td>{{meal.completed}}</td>
-          <td (click)="showEditMealForm(meal)">Edit</td>
+          <td>
+            <button type="button" class="btn btn-secondary" (click)="showEditMealForm(meal)">Edit</button>
+          </td>
         </tr>
       </tbody>
     </table>
-    <button (click)="showAddNewMealForm()">Add Meal</button>
+    <button type="button" class="btn btn-primary" (click)="showAddNewMealForm()">Add Meal</button>
 
   </div>
 
@@ -56,17 +58,17 @@
       <input type="number" name="rating" min="1" max="5" [(ngModel)]="selectedMeal.rating"><br><br>
       <label for="completed">Completed:</label>
       <input type="checkbox" name="completed" [(ngModel)]="selectedMeal.completed"><br><br>
-      <button (click)="submit(selectedMeal)">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="submit(selectedMeal)">Submit</button>
     </form>
     <div *ngIf="selectedMeal.id != null">
       <br>
-      <button (click)="showDelete = true">Delete Meal</button>
+      <button type="button" class="btn btn-secondary" (click)="showDelete = true">Delete Meal</button>
       <div *ngIf="showDelete">
         <br>
         <p>Are you sure?</p>
         <br>
-        <button (click)="disable(selectedMeal)">Yes</button>
-        <button (click)="showDelete=false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="disable(selectedMeal)">Yes</button>
+        <button type="button" class="btn btn-secondary" (click)="showDelete=false">Cancel</button>
       </div>
     </div>
   </div>

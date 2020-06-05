@@ -19,13 +19,13 @@
         </tr>
       </tbody>
     </table>
-    <button (click)="createNewRecipe()" >Enter New Recipe</button>
+    <button type="button" class="btn btn-primary" (click)="createNewRecipe()" >Enter New Recipe</button>
   </div>
 
   <div *ngIf="singleView">
     <h3>{{selectedRecipe.title}}</h3>
     <p>{{selectedRecipe.recipeText}}</p>
-    <button (click)="editRecipe()">Edit this recipe</button>
+    <button type="button" class="btn btn-secondary" (click)="editRecipe()">Edit this recipe</button>
     <br>
     <hr>
     <br>
@@ -55,7 +55,7 @@
       </table>
     </div>
 
-    <button (click)="showEditInstructions()">Edit these instructions</button>
+    <button type="button" class="btn btn-secondary" (click)="showEditInstructions()">Edit these instructions</button>
   </div>
 
   <div *ngIf="showRecipeForm">
@@ -69,13 +69,13 @@
     </form>
     <div *ngIf="selectedRecipe.id != null">
       <br>
-      <button (click)="showDelete = true">Delete</button>
+      <button type="button" class="btn btn-primary" (click)="showDelete = true">Delete</button>
       <div>
         <br>
         <p>Are you sure?</p>
         <br>
-        <button (click)="disable(selectedRecipe)">Yes</button>
-        <button (click)="showDelete = false">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="disable(selectedRecipe)">Yes</button>
+        <button type="button" class="btn btn-secondary" (click)="showDelete = false">Cancel</button>
       </div>
     </div>
   </div>
@@ -86,7 +86,8 @@
       <div class="instruction-box" *ngFor="let instruction of instructionsForEdit" cdkDrag>{{instruction.text}}</div>
       <!-- a div for the list drag and drop thing! -->
     </div>
-    <button (click)="cancelEditInstructions()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="submitEditInstructions()">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelEditInstructions()">Cancel</button>
   </div>
 
 </div>

@@ -112,7 +112,7 @@ export class RecipeService {
         'Authorization': `Basic ${credentials}`
       })
     };
-    return this.http.post<Instruction[]>(this.baseUrl + 'api/recipes/' +
+    return this.http.post<Recipe>(this.baseUrl + 'api/recipes/' +
       recipe.id + '/instructions', recipe.instructions, httpOptions)
       .pipe(
         catchError((err:any) => {

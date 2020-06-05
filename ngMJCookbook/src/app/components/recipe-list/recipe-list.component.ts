@@ -112,6 +112,19 @@ export class RecipeListComponent implements OnInit {
     this.showInstructionsEdit = false;
   }
 
+  submitEditInstructions(){
+    this.selectedRecipe.instructions = this.instructionsForEdit;
+    this.recipeSvc.updateInstructionsAndIngredients(this.selectedRecipe).subscribe(
+      data => {
+        this.cancelEditInstructions();
+        this.selectedRecipe = data;
+      },
+      err => {
+        console.error('RecipeListComponent.submitEditInstructions(): error updating instrucitons');
+      }
+    );
+  }
+
   drop(event: CdkDragDrop<Instruction[]>) {
     moveItemInArray(this.instructionsForEdit, event.previousIndex, event.currentIndex);
   }

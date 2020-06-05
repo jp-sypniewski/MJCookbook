@@ -82,9 +82,23 @@
 
   <div *ngIf="showInstructionsEdit">
     <br>
-    <div cdkDropList class="instruction-list" (cdkDropListDropped)="drop($event)">
-      <div class="instruction-box" *ngFor="let instruction of instructionsForEdit" cdkDrag>{{instruction.text}}</div>
-      <!-- a div for the list drag and drop thing! -->
+    <div
+     cdkDropList
+     class="instruction-list"
+     (cdkDropListDropped)="drop($event)">
+      <div
+        class="instruction-box"
+        *ngFor="let instruction of instructionsForEdit"
+        cdkDrag>
+        <span>
+          {{instruction.text}}
+        </span>
+        <span>
+          <div *ngFor="let ingredient of instruction.ingredients">
+            {{ingredient.name}} {{ingredient.amount}}
+          </div>
+        </span>
+      </div>
     </div>
     <button type="button" class="btn btn-primary" (click)="submitEditInstructions()">Submit</button>
     <button type="button" class="btn btn-secondary" (click)="cancelEditInstructions()">Cancel</button>

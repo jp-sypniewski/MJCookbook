@@ -256,6 +256,7 @@ INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (2, 1, 
 INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (3, 1, 3, 'third instruction recipe one');
 INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (4, 2, 1, 'get turkey from fridge');
 INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (5, 2, 2, 'tear up put on floor');
+INSERT INTO `instruction` (`id`, `recipe_id`, `sequence`, `text`) VALUES (6, 2, 3, 'give treat too');
 
 COMMIT;
 
@@ -266,6 +267,8 @@ COMMIT;
 START TRANSACTION;
 USE `mjcookbook`;
 INSERT INTO `ingredient` (`id`, `name`, `amount`, `substitute`, `inclusion`, `instruction_id`, `recipe_id`) VALUES (1, 'turkey', '1 slice', 'ham, salami', 'mandatory', 4, 2);
+INSERT INTO `ingredient` (`id`, `name`, `amount`, `substitute`, `inclusion`, `instruction_id`, `recipe_id`) VALUES (2, 'treat', '1 treat', 'turkey', 'extra', 6, 2);
+INSERT INTO `ingredient` (`id`, `name`, `amount`, `substitute`, `inclusion`, `instruction_id`, `recipe_id`) VALUES (3, 'pets', 'all of them', NULL, 'mandatory', 6, 2);
 
 COMMIT;
 

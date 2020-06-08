@@ -95,13 +95,39 @@
         </span>
         <span>
           <div *ngFor="let ingredient of instruction.ingredients">
-            {{ingredient.name}} {{ingredient.amount}}
+            {{ingredient.name}} [{{ingredient.amount}}]
+            <button (click)="showEditIngredient(ingredient)">Edit Ingredient</button>
           </div>
         </span>
       </div>
     </div>
     <button type="button" class="btn btn-primary" (click)="submitEditInstructions()">Submit</button>
     <button type="button" class="btn btn-secondary" (click)="cancelEditInstructions()">Cancel</button>
+  </div>
+
+  <div *ngIf="ingredientForEditOrNew">
+    <form>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" [(ngModel)]="ingredientForEditOrNew.name"><br><br>
+      <label for="amount"> Amount:</label><br>
+      <input type="text" id="amount" name="amount" [(ngModel)]="ingredientForEditOrNew.amount"><br><br>
+      <label for="substitute"> Substitute:</label><br>
+      <input type="text" id="substitute" name="substitute" [(ngModel)]="ingredientForEditOrNew.substitute"><br><br>
+      <label>Inclusion:</label><br>
+      <select name="inclusion">
+        <option>Mandatory</option>
+        <option>Removable</option>
+        <option>Extra</option>
+      </select>
+      <label for="instruction">Instruction:</label><br>
+      <select name="instruction" [(ngModel)]="ingredientForEditOrNew.instruction">
+        <option *ngFor="let instruction of instructionsForEdit" [ngValue]="instruction">{{instruction.text}}</option>
+      </select><br><br>
+
+
+      <button>Submit</button>
+      <button>Cancel</button>
+    </form>
   </div>
 
 </div>

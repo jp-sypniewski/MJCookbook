@@ -18,17 +18,17 @@ v0.0 Literally just recipes as written text.  The user logs in, can view the lis
 
 ### Sprints
 
-##### 1) Create project with recipes and users
+##### 1) Create project with recipes and users (5/26-29)
 
 * Going through setup of Spring (w/ JPA) and Angular projects was a great exercise, should walk through setup and document for test project
 * Spring Security setup will need to be adjusted if non-users should be able to view data
 
-##### 2) Create meal (user cooks recipe)
+##### 2) Create meal (user cooks recipe) (5/29-6/5)
 
 * Meal is setup as mostly a join table, will need to function later for how user interacts with meal
 * Good experience in making a more complex html form, with Recipes as options under a select
 
-##### 3) Make recipes more complicated (instructions, ingredients)
+##### 3) Make recipes more complicated (instructions, ingredients) (6/5-12)
 
 * Initial plan was to have instruction have PK of (recipe_id, sequence), nixed to go with normal PK (id)
 * Ingredients and instructions are both deleted if user updates whole list, might want to look for a way to "save" old recipe instructions

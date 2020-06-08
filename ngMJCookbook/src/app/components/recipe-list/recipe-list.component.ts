@@ -22,6 +22,7 @@ export class RecipeListComponent implements OnInit {
   showDelete: Boolean = false;
   showInstructionsEdit: boolean = false;
   instructionsForEdit: Instruction[] = [];
+  ingredientForEditOrNew: Ingredient;
 
   constructor(private router: Router,
     private authSvc: AuthService,
@@ -130,15 +131,9 @@ export class RecipeListComponent implements OnInit {
     moveItemInArray(this.instructionsForEdit, event.previousIndex, event.currentIndex);
   }
 
-  dropIngredient(event: CdkDragDrop<Ingredient[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
+  showEditIngredient(ingredient: Ingredient){
+    this.ingredientForEditOrNew = ingredient;
+
   }
 
 }
